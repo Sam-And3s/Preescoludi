@@ -159,56 +159,55 @@ h1, h2, h3, h4, h5, h6 {
     width: 120px;
     height: 120px;
   }
+  .video-container{
+        padding: 0 10px;
+    }
+
+    .video-buho{
+        max-width: 300px;
+    }
+}
+
+.video-buho{
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+    display: block;
 }
 
 @media (max-width: 480px) {
 
   .hero-banner {
     padding: 1.5rem 0.5rem;
-    border-radius: 0 0 120px 120px;
+    border-radius: 0 0 100px 100px;
   }
 
+  .video-buho{
+        width: 100%;
+        max-width: 250px;
+    }
+
   .hero-banner::before {
-    background-size: 700px;
+    
     background-position: 50% 30%;
   }
 
   .hero-banner h1 {
-    font-size: 60px;
+    font-size: clamp(1rem, 14vw, 4.5rem);
     height: auto;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     line-height: 1;
   }
 
-  .hero-banner p {
-    font-size: 18px;
-    font-weight: 900;
-  }
-
-}
-
-@media (max-width: 380px) {
-
-  .hero-banner {
-    padding: 1.5rem 0.5rem;
-    border-radius: 0 0 85px 85px;
-  }
-
-  .hero-banner::before {
-    background-size: 700px;
-    background-position: 50% 30%;
-  }
-
-  .hero-banner h1 {
-    font-size: 45px;
-    height: auto;
-    padding-bottom: 40px;
-    line-height: 1;
+  .hero-banner h1 span{
+    transform: none !important;
   }
 
   .hero-banner p {
-    font-size: 15px;
+    font-size: clamp(1rem, 5vw, 1.4rem);
     font-weight: 900;
+    line-height: 1.2;
   }
 
 }
