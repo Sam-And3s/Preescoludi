@@ -211,6 +211,29 @@
       box-shadow: var(--shadow-md);
     }
 
+    @media (max-width: 480px) {
+
+      .mixer-slot {
+        width: 90px !important;
+        height: 90px !important;
+        margin: 0 auto;
+      }
+
+      .mixer-slot span:first-child {
+        font-size: 2rem;
+      }
+
+      .mixer-slot-label {
+        font-size: 0.8rem;
+      }
+
+      .mixer-arrow,
+      .row .col-2 span {
+        font-size: 2rem !important;
+      }
+
+    }
+
     .mixer-slot {
       width: 110px;
       height: 110px;
@@ -576,7 +599,7 @@
           
           <div class="row align-items-center justify-content-center mb-4">
             <!-- Slot 1 -->
-            <div class="col-4 col-sm-3 text-center">
+            <div class="col-5 col-sm-3 text-center">
               <div class="mixer-slot selected" id="slot1" onclick="selectSlot(1)">
                 <span id="slot1Emoji">❓</span>
                 <span class="mixer-slot-label" id="slot1Label">Color 1</span>
@@ -589,7 +612,7 @@
             </div>
 
             <!-- Slot 2 -->
-            <div class="col-4 col-sm-3 text-center">
+            <div class="col-5 col-sm-3 text-center">
               <div class="mixer-slot" id="slot2" onclick="selectSlot(2)">
                 <span id="slot2Emoji">❓</span>
                 <span class="mixer-slot-label" id="slot2Label">Color 2</span>
@@ -597,12 +620,12 @@
             </div>
 
             <!-- Arrow Sign -->
-            <div class="col-12 col-sm-1 text-center py-2">
+            <div class="col-12 text-center py-2">
               <div class="mixer-arrow">➔</div>
             </div>
 
             <!-- Result Slot -->
-            <div class="col-8 col-sm-3 text-center">
+            <div class="col-12 col-sm-3 text-center">
               <div class="mixer-slot" id="slotResult" style="pointer-events: none; border-style: dashed; width: 120px; height: 120px;">
                 <span id="slotResultEmoji">✨</span>
                 <span class="mixer-slot-label" id="slotResultLabel">¡Magia!</span>

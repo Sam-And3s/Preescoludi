@@ -40,13 +40,13 @@
       <span>V</span><span>o</span><span>c</span><span>a</span><span>l</span><span>e</span><span>s</span>
     </h1>
     <p class="lead mb-4 text-secondary" style="font-family: var(--font-body); font-weight: 700;">
-      ¡Diviertete aprendiendo y jugando con las vocales!
+    <span style="color: black;">¡Diviertete aprendiendo y jugando con las vocales!</span>
     </p>
   </section>
 
   <!-- Section 1: Discover & Draw Vocales -->
   <section class="container text-center mb-5">
-    <h2 class="section-title text-center">✏️ Descubre y Dibuja las Vocales</h2>
+    <h2 class="section-title text-center">✏️ Descubre y dibuja las vocales</h2>
     <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instr1vocales.ogg')" style="margin-bottom: 20px;">
       <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
     </button>
@@ -57,31 +57,31 @@
         <!-- Card A -->
         <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #ff5252;" onclick="selectVowel('a', '🐝', 'abeja', 'linear-gradient(135deg, #ff8a80, #ff1744)', '#ffffff')">
           <span class="vowel-letter" style="color: #ff1744;">a</span>
-          <p class="vowel-example text-secondary">abeja 🐝</p>
+          <p class="vowel-example text-secondary"><span style="color: black;">abeja 🐝</span></p>
         </div>
 
         <!-- Card E -->
         <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #29b6f6;" onclick="selectVowel('e', '🐘', 'elefante', 'linear-gradient(135deg, #80d8ff, #29b6f6)', '#ffffff')">
           <span class="vowel-letter" style="color: #0288d1;">e</span>
-          <p class="vowel-example text-secondary">elefante 🐘</p>
+          <p class="vowel-example text-secondary"><span style="color: black;">elefante 🐘</span></p>
         </div>
 
         <!-- Card I -->
         <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #ffd600;" onclick="selectVowel('i', '🦎', 'iguana', 'linear-gradient(135deg, #ffe082, #ffd600)', '#333333')">
           <span class="vowel-letter" style="color: #f57f17;">i</span>
-          <p class="vowel-example text-secondary">iguana 🦎</p>
+          <p class="vowel-example text-secondary"><span style="color: black;">iguana 🦎</span></p>
         </div>
 
         <!-- Card O -->
         <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #4caf50;" onclick="selectVowel('o', '🐻', 'oso', 'linear-gradient(135deg, #b9f6ca, #4caf50)', '#ffffff')">
           <span class="vowel-letter" style="color: #2e7d32;">o</span>
-          <p class="vowel-example text-secondary">oso 🐻</p>
+          <p class="vowel-example text-secondary"><span style="color: black;">oso 🐻</span></p>
         </div>
 
         <!-- Card U -->
         <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #ea80fc;" onclick="selectVowel('u', '🦄', 'unicornio', 'linear-gradient(135deg, #ea80fc, #d500f9)', '#ffffff')">
           <span class="vowel-letter" style="color: #aa00ff;">u</span>
-          <p class="vowel-example text-secondary">unicornio 🦄</p>
+          <p class="vowel-example text-secondary"><span style="color: black;">unicornio 🦄</span></p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@
           <h3 class="vowel-display-letter" id="vowelTitle">¡Elige una!</h3>
           <p class="vowel-display-word" id="vowelWord">Selecciona una vocal</p>
           <p class="text-secondary text-center mt-2" id="vowelHint" style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 700;">
-            Toca las tarjetas para oír su sonido y ver un lindo dibujo.
+            <span style="color: black;"> Toca las tarjetas para oír su sonido y ver un lindo dibujo.</span>
           </p>
         </div>
       </div>
@@ -101,7 +101,7 @@
       <div class="col-12 col-lg-4">
         <div class="tracing-container">
           <div class="chalkboard-header">
-            <h3 class="chalkboard-title">🖍️ Pizarra de Trazo</h3>
+            <h3 class="chalkboard-title">🖍️ Pizarra de trazo</h3>
             <div class="chalk-colors">
               <button class="chalk-btn selected" style="background: #ffffff;" onclick="changeChalkColor('#ffffff', this)"></button>
               <button class="chalk-btn" style="background: #ff5252;" onclick="changeChalkColor('#ff5252', this)"></button>
@@ -117,7 +117,7 @@
           </div>
 
           <div class="text-center mt-3">
-            <button class="btn-clear-chalk" onclick="clearChalkboardWithAudio()">🧼 Borrar Pizarra</button>
+            <button class="btn-clear-chalk" onclick="clearChalkboardWithAudio()">🧼 Borrar pizarra</button>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@
 
   <!-- Section 2: Vowel Drag and Drop Classification Game -->
   <section class="container text-center mb-5">
-    <h2 class="section-title text-center">🍏 ¡Asocia y Selecciona!</h2>
+    <h2 class="section-title text-center">🍏 ¡Asocia y selecciona!</h2>
     <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instr2vocales.ogg')" style="margin-bottom: 20px;">
       <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
     </button>
@@ -135,7 +135,7 @@
       <div class="col-12 col-md-10 col-lg-8">
         <div class="drag-game-container">
           <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700; font-size: 1.15rem;">
-            Toca la vocal correcta que indique con cual comienza la palabra de la imagen.
+            <span style="color: black;">Toca la vocal correcta que indique con cual comienza la palabra de la imagen.</span>
           </p>
 
           <!-- Surprise Box containing the Draggable Card -->
@@ -205,7 +205,7 @@
 
   <!-- Section 3: Vowel Guessing Game (Quiz) -->
   <section class="container text-center mb-5">
-    <h2 class="section-title text-center">🎮 ¡Completa la Palabra!</h2>
+    <h2 class="section-title text-center">🎮 ¡Completa la palabra!</h2>
     <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instr3vocales.ogg')" style="margin-bottom: 20px;">
       <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
     </button>
@@ -216,7 +216,7 @@
           <div id="quizActiveView">
             <span class="quiz-word-emoji" id="quizEmoji">🦊</span>
             <p class="lead text-secondary mb-2" style="font-family: var(--font-body); font-weight: 700;">
-              ¿Qué vocal falta para completar el nombre de este dibujo?
+              <span style="color: black;">¿Qué vocal falta para completar el nombre de este dibujo?</span>
             </p>
             
             <div class="quiz-word-box">
@@ -251,7 +251,7 @@
               ¡Increíble! ¡Eres una Súper Estrella! ⭐
             </h3>
             <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700;">
-              Completaste las 15 palabras correctamente y ganaste 15 estrellas mágicas.
+              <span style="color: black;">Completaste las 15 palabras correctamente y ganaste 15 estrellas mágicas.</span>
             </p>
             <button class="btn btn-edu py-3 px-5 fs-5" style="border: 3px solid #fff; box-shadow: var(--shadow-md); border-radius: var(--radius-md);" onclick="resetQuizGame()">
               🔄 Reiniciar el juego
@@ -329,7 +329,7 @@
       titleEl.style.color = textColor;
       wordEl.textContent = word;
       wordEl.style.color = textColor;
-      hintEl.style.color = textColor === '#ffffff' ? 'rgba(255,255,255,0.85)' : '#666666';
+      hintEl.style.color = textColor === '#ffffff' ? 'rgba(255,255,255)' : '#ffffff';
       
       const descriptions = {
         'a': '¡La vocal a! De la hermosa abejita que hace miel. 🐝',
