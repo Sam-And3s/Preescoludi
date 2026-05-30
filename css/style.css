@@ -194,15 +194,23 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .hero-banner h1 {
-    font-size: clamp(1rem, 14vw, 4.5rem);
+    font-size: clamp(1rem, 14vw, 3rem);
     height: auto;
     padding-bottom: 20px;
     line-height: 1;
   }
 
-  .hero-banner h1 span{
-    transform: none !important;
-  }
+  .hero-banner .p { transform: translateY(40px) rotate(-20deg) !important; }
+  .hero-banner .r { transform: translateY(25px) rotate(-15deg) !important; }
+  .hero-banner .e1 { transform: translateY(15px) rotate(-10deg) !important; }
+  .hero-banner .e2 { transform: translateY(5px) rotate(-5deg) !important; }
+  .hero-banner .s { transform: translateY(0px) rotate(0deg) !important; }
+  .hero-banner .c { transform: translateY(0px) rotate(0deg) !important; }
+  .hero-banner .o { transform: translateY(5px) rotate(5deg) !important; }
+  .hero-banner .l { transform: translateY(15px) rotate(10deg) !important; }
+  .hero-banner .u { transform: translateY(25px) rotate(15deg) !important; }
+  .hero-banner .d { transform: translateY(40px) rotate(20deg) !important; }
+  .hero-banner .i { transform: translateY(50px) rotate(25deg) !important; }
 
   .hero-banner p {
     font-size: clamp(1rem, 5vw, 1.4rem);
