@@ -755,9 +755,9 @@ function limpiarCanastas() {
 
     loadNextDragItem();
 
-    let audioActual = null;
+        let audioActual = null;
 
-    function reproducirAudioRuta(ruta) {
+    function reproducirAudioRuta(ruta, callback = null) {
 
         if (audioActual) {
             audioActual.pause();
@@ -765,6 +765,15 @@ function limpiarCanastas() {
         }
 
         audioActual = new Audio(ruta);
+
+        audioActual.onended = () => {
+            console.log("AUDIO TERMINADO");
+
+            if(callback){
+                callback();
+            }
+        };
+
         audioActual.play();
     }
 

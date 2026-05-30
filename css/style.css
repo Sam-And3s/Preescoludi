@@ -186,3 +186,29 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 }
+
+@media (max-width: 380px) {
+
+  .hero-banner {
+    padding: 1.5rem 0.5rem;
+    border-radius: 0 0 85px 85px;
+  }
+
+  .hero-banner::before {
+    background-size: 700px;
+    background-position: 50% 30%;
+  }
+
+  .hero-banner h1 {
+    font-size: 45px;
+    height: auto;
+    padding-bottom: 40px;
+    line-height: 1;
+  }
+
+  .hero-banner p {
+    font-size: 15px;
+    font-weight: 900;
+  }
+
+}
