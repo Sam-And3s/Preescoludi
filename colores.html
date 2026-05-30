@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Juega con los Colores! - Preescoludi</title>
+  <link rel="icon" href="assets/images/cabezabuho.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+  
+  <style>
+    :root {
+      --font-banner: 'Fredoka', sans-serif;
+    }
+    
+    body {
+      background-image: url('assets/images/fondo.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: #f7f6fd;
+    }
+
+    .navbar-custom {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 5px dashed var(--color-primary);
+      border-radius: 0 0 2.5rem 2.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .navbar-brand {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--color-primary) !important;
+    }
+
+    .btn-back-home {
+      background: var(--color-accent);
+      border: 3px solid #fff;
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      color: #fff !important;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-back-home:hover {
+      background: var(--color-primary);
+      transform: scale(1.06);
+    }
+
+    .font-banner-colores span {
+      font-family: var(--font-banner);
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+      text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+      margin: 0 3px;
+      display: inline-block;
+      animation: bounce-letters 2s ease-in-out infinite alternate;
+    }
+
+    .font-banner-colores span:nth-child(1) { animation-delay: 0.1s; }
+    .font-banner-colores span:nth-child(2) { animation-delay: 0.2s; }
+    .font-banner-colores span:nth-child(3) { animation-delay: 0.3s; }
+    .font-banner-colores span:nth-child(4) { animation-delay: 0.4s; }
+    .font-banner-colores span:nth-child(5) { animation-delay: 0.5s; }
+    .font-banner-colores span:nth-child(6) { animation-delay: 0.6s; }
+    .font-banner-colores span:nth-child(7) { animation-delay: 0.7s; }
+
+    @keyframes bounce-letters {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      color: var(--color-primary);
+      text-shadow: 2px 2px 0px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+    
+        .speech-badge {
+      background: var(--color-primary);
+      color: white;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+      animation: palpitar 1.2s infinite;
+    }
+
+    @keyframes palpitar {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(255, 214, 0, 0.7);
+      }
+      50% {
+        transform: scale(1.12);
+        box-shadow: 0 0 25px rgba(255, 214, 0, 0.9);
+      }
+
+      100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 rgba(255, 214, 0, 0.7);
+      }
+    }
+
+    .speech-badge:hover {
+      background: var(--color-accent);
+      transform: scale(1.05);
+    }
+    /* Color Card Design */
+    .color-bubble-card {
+      background: white;
+      border-radius: 2rem;
+      border: 4px dashed var(--color-border);
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .color-bubble-card:hover {
+      transform: translateY(-8px) scale(1.05);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .color-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      border: 4px solid #fff;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .color-bubble-card:hover .color-circle {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .color-name {
+      font-family: var(--font-title);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    /* Interactive Canvas */
+    .color-canvas {
+      background: #fff;
+      border: 6px dashed var(--color-primary);
+      border-radius: 2.5rem;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .color-canvas-inner {
+      text-align: center;
+      z-index: 2;
+    }
+
+    .color-canvas-emoji {
+      font-size: 6rem;
+      animation: float-deco 3s ease-in-out infinite;
+      display: inline-block;
+    }
+
+    .color-canvas-title {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      color: #333;
+      margin-top: 1rem;
+      font-weight: 700;
+    }
+
+    /* Mixer Section */
+    .mixer-container {
+      background: #fff;
+      border-radius: 2.5rem;
+      border: 5px dashed var(--color-secondary);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .mixer-slot {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px dashed #ccc;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      margin: 0 auto;
+      position: relative;
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .mixer-slot:hover {
+      transform: scale(1.05);
+      border-color: var(--color-secondary);
+    }
+
+    .mixer-slot.selected {
+      border-color: var(--color-primary);
+      border-style: solid;
+      box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.25);
+    }
+
+    .mixer-slot.active {
+      border-style: solid;
+      border-color: #fff;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .mixer-slot-label {
+      font-size: 0.8rem;
+      font-family: var(--font-body);
+      color: #777;
+      margin-top: -5px;
+      font-weight: 700;
+    }
+
+    .mixer-arrow {
+      font-size: 3.5rem;
+      color: var(--color-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 110px;
+      animation: pulse-arrow 1.5s infinite alternate;
+    }
+
+    @keyframes pulse-arrow {
+      0% { transform: scale(0.9); }
+      100% { transform: scale(1.1); }
+    }
+
+    .btn-mix {
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-title);
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.8rem 2.8rem;
+      font-size: 1.4rem;
+      box-shadow: var(--shadow-md);
+      transition: all 0.2s ease;
+    }
+
+    .btn-mix:hover {
+      background: var(--color-accent);
+      transform: scale(1.05);
+    }
+
+    .btn-mix:disabled {
+      background: #ccc;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .mixer-color-selector {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .mixer-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .mixer-btn:hover {
+      transform: scale(1.18);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.18);
+      z-index: 10;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: #fff;
+      border-radius: 2.5rem;
+      border: 5px dashed var(--color-accent);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      position:relative;
+    }
+
+    .quiz-question {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .quiz-option {
+      background: #fafafa;
+      border: 4px solid #eee;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-option:hover {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: var(--shadow-md);
+    }
+
+    .quiz-option-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-option-label {
+      font-family: var(--font-title);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .quiz-option.correct {
+      border-color: var(--color-success) !important;
+      background: #e8f5e9 !important;
+      animation: success-pulse 0.6s ease-in-out;
+    }
+
+    .quiz-option.incorrect {
+      border-color: var(--color-danger) !important;
+      background: #ffebee !important;
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes success-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
+
+    .quiz-overlay{
+      position:absolute;
+      inset:0;
+      background:rgba(255,255,255,0.95);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:100;
+      border-radius:25px;
+    }
+
+    .quiz-overlay-content{
+      text-align:center;
+      padding:2rem;
+    }
+
+    .quiz-overlay-content h3{
+      font-family:var(--font-title);
+      margin-bottom:1rem;
+    }
+
+    .speech-badge {
+      background: var(--color-primary);
+      color: white;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .speech-badge:hover {
+      background: var(--color-accent);
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <span style="font-family: var(--font-title); font-weight: 900; font-size: 2.2rem;">
+          <span style="color:#7C4DFF;">P</span><span style="color:#FF4081;">r</span><span style="color:#f4b82e;">e</span><span style="color:#4CAF50;">e</span><span style="color:#29B6F6;">s</span><span style="color:#7C4DFF;">c</span><span style="color:#FF4081;">o</span><span style="color:#FFB300;">l</span><span style="color:#29B6F6;">u</span><span style="color:#7C4DFF;">d</span><span style="color:#FF4081;">i</span>
+        </span>
+      </a>
+      <a href="index.html" class="btn-back-home d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
+        <span>Inicio</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container text-center mb-5">
+    <h1 class="font-banner-colores mb-3">
+      <span>C</span><span>o</span><span>l</span><span>o</span><span>r</span><span>e</span><span>s</span>
+    </h1>
+    <p class="lead mb-4 text-secondary" style="font-family: var(--font-body); font-weight: 700;">
+      ¡Toca los colores para descubrir su magia, mézclalos y juega a adivinar!
+    </p>
+  </section>
+
+  <!-- Section 1: Discover Colors -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🎨 Descubre los Colores</h2>
+    <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/bienveColores.ogg')" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
+    </button>
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Color Cards Grid -->
+      <div class="col-12 col-lg-8">
+        <div class="row g-3">
+          
+          <!-- Rojo -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #ff5252;" onclick="selectDiscoverColor('Rojo', '🍎', 'linear-gradient(135deg, #ff8a80, #ff1744)', '#ffffff')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #ff8a80, #ff1744);">🍎</div>
+              <p class="color-name" style="color: #ff1744;">Rojo</p>
+            </div>
+          </div>
+
+          <!-- Azul -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #29b6f6;" onclick="selectDiscoverColor('Azul', '🐳', 'linear-gradient(135deg, #80d8ff, #29b6f6)', '#ffffff')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #80d8ff, #29b6f6);">🐳</div>
+              <p class="color-name" style="color: #0288d1;">Azul</p>
+            </div>
+          </div>
+
+          <!-- Amarillo -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #ffd600;" onclick="selectDiscoverColor('Amarillo', '☀️', 'linear-gradient(135deg, #ffe082, #ffd600)', '#333333')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #ffe082, #ffd600);">☀️</div>
+              <p class="color-name" style="color: #f57f17;">Amarillo</p>
+            </div>
+          </div>
+
+          <!-- Verde -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #4caf50;" onclick="selectDiscoverColor('Verde', '🐸', 'linear-gradient(135deg, #b9f6ca, #4caf50)', '#ffffff')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #b9f6ca, #4caf50);">🐸</div>
+              <p class="color-name" style="color: #2e7d32;">Verde</p>
+            </div>
+          </div>
+
+          <!-- Naranja -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #ff9100;" onclick="selectDiscoverColor('Naranja', '🍊', 'linear-gradient(135deg, #ffd180, #ff9100)', '#ffffff')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #ffd180, #ff9100);">🍊</div>
+              <p class="color-name" style="color: #e65100;">Naranja</p>
+            </div>
+          </div>
+
+          <!-- Morado -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #ea80fc;" onclick="selectDiscoverColor('Morado', '🍇', 'linear-gradient(135deg, #ea80fc, #d500f9)', '#ffffff')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #ea80fc, #d500f9);">🍇</div>
+              <p class="color-name" style="color: #aa00ff;">Morado</p>
+            </div>
+          </div>
+
+          <!-- Rosado -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #ff4081;" onclick="selectDiscoverColor('Rosado', '🦩', 'linear-gradient(135deg, #ff80ab, #ff4081)', '#ffffff')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #ff80ab, #ff4081);">🦩</div>
+              <p class="color-name" style="color: #c51162;">Rosado</p>
+            </div>
+          </div>
+
+          <!-- Blanco -->
+          <div class="col-6 col-sm-4 col-md-3">
+            <div class="color-bubble-card text-center" style="--color-border: #9e9e9e;" onclick="selectDiscoverColor('Blanco', '☁️', 'linear-gradient(135deg, #ffffff, #eeeeee)', '#333333')">
+              <div class="color-circle" style="background: linear-gradient(135deg, #ffffff, #eeeeee); border: 4px solid #ccc;">☁️</div>
+              <p class="color-name" style="color: #616161;">Blanco</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Live Color Showcase Canvas -->
+      <div class="col-12 col-lg-4">
+        <div class="color-canvas" id="canvasDisplay">
+          <div class="color-canvas-inner">
+            <span class="color-canvas-emoji" id="canvasEmoji">🎨</span>
+            <h3 class="color-canvas-title" id="canvasTitle">¡Elige un color!</h3>
+            <p class="text-secondary mt-2" id="canvasSubtitle" style="font-family: var(--font-body); font-weight: 700; font-size: 1rem;">
+              Haz clic en cualquier tarjeta de color de la izquierda para ver su magia.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Magic Color Mixer -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🧪 El Mezclador Mágico</h2>
+    <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instrucColo1.ogg')" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="mixer-container">
+          <p class="text-center mb-4" style="font-family: var(--font-body); font-weight: 700; font-size: 1.1rem; color: #555;">
+            Selecciona un espacio y luego elige un color abajo para mezclar.
+          </p>
+          
+          <div class="row align-items-center justify-content-center mb-4">
+            <!-- Slot 1 -->
+            <div class="col-4 col-sm-3 text-center">
+              <div class="mixer-slot selected" id="slot1" onclick="selectSlot(1)">
+                <span id="slot1Emoji">❓</span>
+                <span class="mixer-slot-label" id="slot1Label">Color 1</span>
+              </div>
+            </div>
+
+            <!-- Plus Sign -->
+            <div class="col-2 text-center">
+              <span style="font-family: var(--font-title); font-size: 3rem; color: var(--color-primary); font-weight: 900;">+</span>
+            </div>
+
+            <!-- Slot 2 -->
+            <div class="col-4 col-sm-3 text-center">
+              <div class="mixer-slot" id="slot2" onclick="selectSlot(2)">
+                <span id="slot2Emoji">❓</span>
+                <span class="mixer-slot-label" id="slot2Label">Color 2</span>
+              </div>
+            </div>
+
+            <!-- Arrow Sign -->
+            <div class="col-12 col-sm-1 text-center py-2">
+              <div class="mixer-arrow">➔</div>
+            </div>
+
+            <!-- Result Slot -->
+            <div class="col-8 col-sm-3 text-center">
+              <div class="mixer-slot" id="slotResult" style="pointer-events: none; border-style: dashed; width: 120px; height: 120px;">
+                <span id="slotResultEmoji">✨</span>
+                <span class="mixer-slot-label" id="slotResultLabel">¡Magia!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Color Buttons Grid to Choose Mixers -->
+          <div class="mixer-color-selector">
+            <button class="mixer-btn" style="background: #ff1744;" title="Rojo" onclick="addColorToSlot('Rojo', '#ff1744', '🍎')"></button>
+            <button class="mixer-btn" style="background: #29b6f6;" title="Azul" onclick="addColorToSlot('Azul', '#29b6f6', '🐳')"></button>
+            <button class="mixer-btn" style="background: #ffd600;" title="Amarillo" onclick="addColorToSlot('Amarillo', '#ffd600', '☀️')"></button>
+            <button class="mixer-btn" style="background: #ffffff; border: 4px solid #ccc;" title="Blanco" onclick="addColorToSlot('Blanco', '#ffffff', '☁️')"></button>
+          </div>
+
+          <div class="text-center mt-4">
+            <button class="btn-mix" id="mixBtn" onclick="mixColors()" disabled>🔮 ¡Mezclar Colores!</button>
+          </div>
+          <div class="text-center mt-3">
+              <button class="btn-mix" id="resetMixerBtn" onclick="resetMixer()" disabled>
+                  🧹 Limpiar Mezcla
+              </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Guess the Color Quiz -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🎮 ¡El Reto de los Colores!</h2>
+    <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instrucColo2.ogg')" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="quiz-card">
+          <div id="quizStartScreen" class="quiz-overlay">
+            <div class="quiz-overlay-content">
+              <h3>🎨 ¡El Reto de los Colores!</h3>
+              <p>Escucha la pregunta y toca el dibujo correcto.</p>
+              <button class="btn btn-edu" onclick="startQuizGame()">
+                ▶️ Iniciar Juego
+              </button>
+            </div>
+          </div>
+          <div class="quiz-question" id="quizQuestion">
+            ¿Dónde está el objeto de color...?
+          </div>
+          
+          <div class="row g-3 justify-content-center" id="quizOptionsContainer">
+            <!-- Dynamic Options will be loaded here -->
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between align-items-center px-2">
+            <span style="font-family: var(--font-title); font-size: 1.2rem; color: var(--color-primary); font-weight: 700;" id="quizScore">
+              Puntos: ⭐ 0
+            </span>
+            <button class="btn btn-edu py-2 px-4 fs-6" onclick="generateNewQuiz()">
+              🔄 Cambiar pregunta
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-5"
+    style="background:#fff; border-radius:var(--radius-lg) var(--radius-lg) 0 0; box-shadow:var(--shadow-sm);">
+    <span style="font-family:var(--font-title); color:var(--color-accent); font-weight: 700;">
+      Desarrollado por @SkahnowTech<span style="color:var(--color-primary);"> ♥</span>
+    </span>
+  </footer>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // --- Speech Synthesis Utility ---
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Cancel any current speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        
+        // Find Spanish voice
+        const voices = window.speechSynthesis.getVoices();
+        const esVoice = voices.find(v => v.lang.startsWith('es'));
+        if (esVoice) utterance.voice = esVoice;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Force voice list loading in Chrome/Safari
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    // --- Section 1: Discover Color Logic ---
+    function selectDiscoverColor(name, emoji, gradient, textColor) {
+      const canvas = document.getElementById('canvasDisplay');
+      const emojiEl = document.getElementById('canvasEmoji');
+      const titleEl = document.getElementById('canvasTitle');
+      const subtitleEl = document.getElementById('canvasSubtitle');
+
+      // Update Canvas styling and contents
+      canvas.style.background = gradient;
+      canvas.style.borderColor = '#ffffff';
+      emojiEl.textContent = emoji;
+      titleEl.textContent = name;
+      titleEl.style.color = textColor;
+      subtitleEl.style.color = textColor === '#ffffff' ? 'rgba(255,255,255,0.85)' : '#555555';
+      
+      const descriptions = {
+        'Rojo': '¡Como una deliciosa manzana roja! 🍎',
+        'Azul': '¡Como el inmenso mar y una gran ballena azul! 🐳',
+        'Amarillo': '¡Brillante como el sol que brilla en el cielo! ☀️',
+        'Verde': '¡Como una saltarina ranita en la hoja! 🐸',
+        'Naranja': '¡Como una jugosa naranja para desayunar! 🍊',
+        'Morado': '¡Como unas ricas uvas dulces! 🍇',
+        'Rosado': '¡Como un hermoso flamingo rosado! 🦩',
+        'Blanco': '¡Como una suave nube flotando en el viento! ☁️'
+      };
+      subtitleEl.textContent = descriptions[name] || '';
+
+      // Trigger standard confetti splash at screen center
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+
+      const audios = {
+        'Rojo': 'assets/audio/rojo1.ogg',
+        'Azul': 'assets/audio/azul1.ogg',
+        'Amarillo': 'assets/audio/amarillo1.ogg',
+        'Verde': 'assets/audio/verde1.ogg',
+        'Naranja': 'assets/audio/naranja1.ogg',
+        'Morado': 'assets/audio/morado1.ogg',
+        'Rosado': 'assets/audio/rosado1.ogg',
+        'Blanco': 'assets/audio/blanco1.ogg'
+      }
+
+      // Play vocal
+      reproducirAudioRuta(audios[name]);
+    }
+
+    // --- Section 2: Magic Mixer Logic ---
+    let activeSlot = 1;
+    const slots = {
+      1: { name: '', hex: '', emoji: '' },
+      2: { name: '', hex: '', emoji: '' }
+    };
+
+    function selectSlot(num) {
+      activeSlot = num;
+      document.getElementById('slot1').classList.remove('selected');
+      document.getElementById('slot2').classList.remove('selected');
+      document.getElementById(`slot${num}`).classList.add('selected');
+      
+      const audios = {
+      1: 'assets/audio/ranura1.ogg',
+      2: 'assets/audio/ranura2.ogg'
+      };
+
+      reproducirAudioRuta(audios[num]);
+    }
+
+    function addColorToSlot(name, hex, emoji) {
+      slots[activeSlot].name = name;
+      slots[activeSlot].hex = hex;
+      slots[activeSlot].emoji = emoji;
+
+      const slotEl = document.getElementById(`slot${activeSlot}`);
+      const emojiEl = document.getElementById(`slot${activeSlot}Emoji`);
+      const labelEl = document.getElementById(`slot${activeSlot}Label`);
+
+      slotEl.style.background = hex;
+      slotEl.style.color = name === 'Blanco' ? '#333333' : '#ffffff';
+      slotEl.classList.add('active');
+      emojiEl.textContent = emoji;
+      labelEl.textContent = name;
+      labelEl.style.color = name === 'Blanco' ? '#333333' : '#ffffff';
+
+      // Play vocal
+      const audios = {
+        'Rojo': 'assets/audio/rojo2.ogg',
+        'Azul': 'assets/audio/azul2.ogg',
+        'Amarillo': 'assets/audio/amarillo2.ogg',
+        'Blanco': 'assets/audio/blanco2.ogg'
+      };
+
+      if (activeSlot === 1 && !slots[2].name) {
+
+          reproducirAudioRuta(audios[name], () => {
+            console.log("TERMINÓ EL AUDIO DEL COLOR");
+              selectSlot(2);
+          });
+
+      } else {
+
+          reproducirAudioRuta(audios[name]);
+      }
+
+      checkMixEligibility();
+    }
+
+    function checkMixEligibility() {
+      const mixBtn = document.getElementById('mixBtn');
+
+      if (slots[1].name && slots[2].name) {
+
+          mixBtn.disabled = false;
+          mixBtn.classList.add('pulse');
+
+      } else {
+
+          mixBtn.disabled = true;
+          mixBtn.classList.remove('pulse');
+
+      }
+    }
+
+
+
+    function mixColors() {
+      reproducirAudioRuta('assets/audio/mezclando.ogg', () => {
+        const col1 = slots[1].name;
+        const col2 = slots[2].name;
+        
+        const resSlot = document.getElementById('slotResult');
+        const resEmoji = document.getElementById('slotResultEmoji');
+        const resLabel = document.getElementById('slotResultLabel');
+
+        // Mixing Mappings
+        const combinations = [
+          { c1: 'Rojo', c2: 'Amarillo', result: 'Naranja', emoji: '🍊', hex: '#ff9100', phrase: 'assets/audio/mezclaNaranja1.ogg' },
+          { c1: 'Amarillo', c2: 'Rojo', result: 'Naranja', emoji: '🍊', hex: '#ff9100', phrase: 'assets/audio/mezclaNaranja2.ogg' },
+          
+          { c1: 'Azul', c2: 'Amarillo', result: 'Verde', emoji: '🐸', hex: '#4caf50', phrase: 'assets/audio/mezclaVerde1.ogg' },
+          { c1: 'Amarillo', c2: 'Azul', result: 'Verde', emoji: '🐸', hex: '#4caf50', phrase: 'assets/audio/mezclaVerde2.ogg' },
+          
+          { c1: 'Rojo', c2: 'Azul', result: 'Morado', emoji: '🍇', hex: '#d500f9', phrase: 'assets/audio/mezclaMorado1.ogg' },
+          { c1: 'Azul', c2: 'Rojo', result: 'Morado', emoji: '🍇', hex: '#d500f9', phrase: 'assets/audio/mezclaMorado2.ogg' },
+          
+          { c1: 'Rojo', c2: 'Blanco', result: 'Rosado', emoji: '🦩', hex: '#ff4081', phrase: 'assets/audio/mezclaRosado1.ogg' },
+          { c1: 'Blanco', c2: 'Rojo', result: 'Rosado', emoji: '🦩', hex: '#ff4081', phrase: 'assets/audio/mezclaRosado2.ogg' }
+        ];
+
+        // Default fallback mix
+        let result = {
+          result: '¡Magia!',
+          emoji: '✨',
+          hex: '#E8E9EB',
+          phrase: 'assets/audio/otraCombi.ogg'
+        };
+
+        // Check if combination exists
+        const match = combinations.find(comb => comb.c1 === col1 && comb.c2 === col2);
+        if (match) result = match;
+
+        if (col1 === col2) {
+          result = {
+            result: col1,
+            emoji: slots[1].emoji,
+            hex: slots[1].hex,
+            phrase: 'assets/audio/mismoColor.ogg'
+          };
+          reproducirAudioRuta(result.phrase);
+        }
+
+        // Play puff of confetti explosion
+        confetti({
+          particleCount: 80,
+          spread: 80,
+          colors: [slots[1].hex, slots[2].hex, result.hex]
+        });
+
+        // Update Result Slot View
+        resSlot.style.background = result.hex;
+        resSlot.style.color = result.result === 'Blanco' || result.result === 'Amarillo Claro' ? '#333333' : '#ffffff';
+        resSlot.style.borderStyle = 'solid';
+        resSlot.style.borderColor = '#ffffff';
+        resEmoji.textContent = result.emoji;
+        resLabel.textContent = result.result;
+        resLabel.style.color = result.result === 'Blanco' || result.result === 'Amarillo Claro' ? '#333333' : '#ffffff';
+      
+        // Activar limpiar
+        document.getElementById('resetMixerBtn').disabled = false;
+
+        // Desactivar mezclar
+        document.getElementById('mixBtn').disabled = true;
+        document.getElementById('mixBtn').classList.remove('pulse');
+
+        reproducirAudioRuta(result.phrase);
+
+      });
+    }
+
+    function resetMixer() {
+      reproducirAudioRuta('assets/audio/limpiar.ogg', () => {
+
+        // Reiniciar objeto
+        slots[1] = { name: '', hex: '', emoji: '' };
+        slots[2] = { name: '', hex: '', emoji: '' };
+
+        // Espacio 1
+        document.getElementById('slot1Emoji').textContent = '❓';
+        document.getElementById('slot1Label').textContent = 'Color 1';
+
+        const slot1 = document.getElementById('slot1');
+        slot1.style.background = '';
+        slot1.style.color = '';
+        slot1.classList.remove('active');
+
+        // Espacio 2
+        document.getElementById('slot2Emoji').textContent = '❓';
+        document.getElementById('slot2Label').textContent = 'Color 2';
+
+        const slot2 = document.getElementById('slot2');
+        slot2.style.background = '';
+        slot2.style.color = '';
+        slot2.classList.remove('active');
+
+        // Resultado
+        document.getElementById('slotResultEmoji').textContent = '✨';
+        document.getElementById('slotResultLabel').textContent = '¡Magia!';
+
+        const result = document.getElementById('slotResult');
+        result.style.background = '';
+        result.style.color = '';
+
+        // Desactivar botón mezclar
+        document.getElementById('mixBtn').disabled = true;
+        document.getElementById('resetMixerBtn').disabled = true;
+
+        // Volver a seleccionar espacio 1
+        activeSlot = 1;
+
+        document.getElementById('slot1').classList.add('selected');
+        document.getElementById('slot2').classList.remove('selected');
+
+        // Audio de la profesora
+        reproducirAudioRuta('assets/audio/ranura1.ogg');
+      });
+    }
+
+    // --- Section 3: Guessing Game (Quiz) Logic ---
+    function startQuizGame(){
+
+    document.getElementById('quizStartScreen').style.display = 'none';
+
+    quizScore = 0;
+
+    document.getElementById('quizScore').textContent =
+        'Puntos: ⭐ 0';
+
+    generateNewQuiz(true);
+  }
+  
+    const quizItems = [
+      { color: 'Rojo', emoji: '🍎', label: 'Manzana' },
+      { color: 'Rojo', emoji: '🍓', label: 'Fresa' },
+      { color: 'Azul', emoji: '🐳', label: 'Ballena' },
+      { color: 'Azul', emoji: '🐬', label: 'Delfín' },
+      { color: 'Amarillo', emoji: '☀️', label: 'Sol' },
+      { color: 'Amarillo', emoji: '🍌', label: 'Plátano' },
+      { color: 'Verde', emoji: '🐸', label: 'Rana' },
+      { color: 'Verde', emoji: '🌳', label: 'Árbol' },
+      { color: 'Naranja', emoji: '🍊', label: 'Naranja' },
+      { color: 'Naranja', emoji: '🥕', label: 'Zanahoria' },
+      { color: 'Morado', emoji: '🍇', label: 'Uvas' },
+      { color: 'Rosado', emoji: '🦩', label: 'Flamingo' },
+      { color: 'Rosado', emoji: '🐷', label: 'Cerdito' },
+      { color: 'Blanco', emoji: '☁️', label: 'Nube' },
+      { color: 'Blanco', emoji: '⛄', label: 'Muñeco de Nieve' }
+    ];
+
+    let currentCorrectAnswer = null;
+    let quizScore = 0;
+
+    function generateNewQuiz(reproducirAudio = true) {
+      // Pick a random correct item
+      const correctIdx = Math.floor(Math.random() * quizItems.length);
+      currentCorrectAnswer = quizItems[correctIdx];
+
+      // Select 2 other items of DIFFERENT colors for distractors
+      let distractors = quizItems.filter(item => item.color !== currentCorrectAnswer.color);
+      
+      // Shuffle distractors and pick 2
+      distractors = distractors.sort(() => 0.5 - Math.random()).slice(0, 2);
+
+      // Mix them together
+      const options = [currentCorrectAnswer, ...distractors].sort(() => 0.5 - Math.random());
+
+      // Update question view
+      const quizQuestionEl = document.getElementById('quizQuestion');
+      
+      // Make the color name super clean and color themed in text
+      const colorWordSpan = `<span style="font-family: var(--font-title); font-weight:900; text-transform: uppercase;">${currentCorrectAnswer.color}</span>`;
+      quizQuestionEl.innerHTML = `¿Puedes encontrar el objeto de color ${colorWordSpan}?`;
+
+      // Render options
+      const container = document.getElementById('quizOptionsContainer');
+      container.innerHTML = '';
+
+      options.forEach(opt => {
+        const colDiv = document.createElement('div');
+        colDiv.className = 'col-6 col-sm-4';
+
+        const optCard = document.createElement('div');
+        optCard.className = 'quiz-option';
+        optCard.innerHTML = `
+          <span class="quiz-option-emoji">${opt.emoji}</span>
+          <span class="quiz-option-label">${opt.label}</span>
+        `;
+        
+        optCard.onclick = () => checkQuizAnswer(optCard, opt);
+        colDiv.appendChild(optCard);
+        container.appendChild(colDiv);
+      });
+
+      const audiosPreguntaColor = {
+        'Rojo': 'assets/audio/pregunta_rojo.ogg',
+        'Azul': 'assets/audio/pregunta_azul.ogg',
+        'Amarillo': 'assets/audio/pregunta_amarillo.ogg',
+        'Verde': 'assets/audio/pregunta_verde.ogg',
+        'Naranja': 'assets/audio/pregunta_naranja.ogg',
+        'Morado': 'assets/audio/pregunta_morado.ogg',
+        'Rosado': 'assets/audio/pregunta_rosado.ogg',
+        'Blanco': 'assets/audio/pregunta_blanco.ogg'
+      };
+
+      const audioPregunta = audiosPreguntaColor[currentCorrectAnswer.color];
+
+      if(reproducirAudio && audioPregunta){
+        reproducirAudioRuta(audioPregunta);
+      }
+    }
+
+    function checkQuizAnswer(cardEl, optionSelected) {
+      // Prevent further clicks until reloaded
+      const allOptions = document.querySelectorAll('.quiz-option');
+      allOptions.forEach(opt => opt.style.pointerEvents = 'none');
+
+      if (optionSelected.color === currentCorrectAnswer.color) {
+        cardEl.classList.add('correct');
+
+            quizScore += 1;
+
+            document.getElementById('quizScore').textContent =
+                `Puntos: ⭐ ${quizScore}`;
+
+            // Verificar victoria
+            if (quizScore >= 10) {
+
+                confetti({
+                    particleCount: 200,
+                    spread: 100,
+                    origin: { y: 0.6 }
+                });
+
+                setTimeout(() => {
+                    showQuizCompletionScreen();
+                }, 2000);
+
+                return;
+            }
+
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            reproducirAudioRuta('assets/audio/felicitaciones.ogg');
+
+            setTimeout(() => {
+                generateNewQuiz();
+            }, 2500);
+      } else {
+        cardEl.classList.add('incorrect');
+        reproducirAudioRuta('assets/audio/vuelveintentarlo.ogg')
+        
+        // Re-enable clicks after animation
+        setTimeout(() => {
+          cardEl.classList.remove('incorrect');
+          allOptions.forEach(opt => opt.style.pointerEvents = 'auto');
+        }, 800);
+      }
+    }
+
+    // Initial load
+    window.addEventListener('DOMContentLoaded', () => {
+      // Auto select Slot 1 in Mixer
+      activeSlot = 1;
+      document.getElementById('slot1').classList.add('selected');
+      
+    });
+
+    function showQuizCompletionScreen(){
+
+      document.querySelector('.quiz-card').innerHTML = `
+          <div class="text-center p-5">
+              <h2>🏆 ¡Excelente trabajo!</h2>
+              <p>Has conseguido 10 estrellas.</p>
+
+              <button class="btn btn-edu mt-3"
+                      onclick="location.reload()">
+                  🔄 Volver a jugar
+              </button>
+          </div>
+      `;
+
+      reproducirAudioRuta('assets/audio/lolograste.ogg');
+    }
+
+    let audioActual = null;
+
+function reproducirAudioRuta(ruta, callback = null) {
+
+    if (audioActual) {
+        audioActual.pause();
+        audioActual.currentTime = 0;
+    }
+
+    audioActual = new Audio(ruta);
+
+    audioActual.onended = () => {
+        console.log("AUDIO TERMINADO");
+
+        if(callback){
+            callback();
+        }
+    };
+
+    audioActual.play();
+}
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+/* style.css - Estilos base para la plataforma Preescoludi */
+@import url('https://fonts.googleapis.com/css2?family=Cause:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cause:wght@900&family=Fredoka:wdth,wght@85,300..700&display=swap');
+:root {
+  --color-primary: #7c4dff;
+  --color-secondary: #f4b82e;
+  --color-accent: #ff4081;
+  --color-bg: #f7f6fd;
+  --color-success: #4caf50;
+  --color-info: #29b6f6;
+  --color-warning: #edf118f4;
+  --color-danger: #ff5252;
+  --color-card: #fff;
+  --color-border: #bc6060;
+  --color-owl: #7c4dff;
+  --color-owl-beak: #f4b82e;
+  --color-owl-glasses: #ff4081;
+  --radius-lg: 2.5rem;
+  --radius-md: 1.5rem;
+  --radius-sm: 1rem;
+  --shadow-lg: 0 8px 32px 0 rgba(124,77,255,0.15);
+  --shadow-md: 0 4px 16px 0 rgba(124,77,255,0.10);
+  --shadow-sm: 0 2px 8px 0 rgba(124,77,255,0.08);
+  --font-title: 'Comic Sans MS', 'Cause', 'Segoe Print';
+  --font-body: 'Comic Sans MS', 'Cause', 'Segoe Print';
+  --font-banner: 'fredoka'
+}
+
+body {
+  background-image: url('../assets/images/fondo.png');
+  font-family: var(--font-body);
+  color: #333;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 700;
+}
+
+.card-edu {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+  border: 4px dashed var(--color-border);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.card-edu:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-edu {
+  font-size: 1.25rem;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 2rem;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-edu:hover {
+  background: var(--color-accent);
+  transform: scale(1.05);
+}
+
+.video-buho {
+    border: 8px solid #f1b2e4;
+    border-radius: 20px;
+    animation: resaltar 1.5s infinite;
+}
+
+@keyframes resaltar {
+    0% {
+        box-shadow: 0 0 0px #f1b2e4;
+    }
+    50% {
+        box-shadow: 0 0 25px #f1b2e4;
+    }
+    100% {
+        box-shadow: 0 0 0px #f1b2e4;
+    }
+}
+
+.hero-banner {  
+  border-radius: 0 0 1000px 1000px;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-banner h1 {
+  font-size: clamp(3rem, 10vw, 8rem);   font-family: var(--font-banner); text-align: center; padding-bottom: 70px; padding-top: 50px; height: 200px;
+}
+
+.hero-banner p {
+  font-size: clamp(1rem, 3vw, 2.5rem); font-weight: 900;
+}
+
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url('../assets/images/nube.png');
+  opacity: 0.5;
+  background-size: 1300px;
+  background-position: 30% 30%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+
+  .hero-banner {
+    padding: 2rem 1rem 1.5rem 1rem;
+    border-radius: 0 0 100px 100px;
+  }
+
+  .hero-banner h1 {
+    font-size: 90px;
+    height: auto;
+    padding-bottom: 40px;
+  }
+
+  .hero-banner p {
+    font-size: 28px;
+  }
+
+  .hero-banner::before {
+    background-size: 900px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 1.5rem 0.5rem 1.2rem 0.5rem;
+    border-radius: 0 0 100px 100px;
+  }
+  .hero-banner h1 {
+    font-size: 50px;
+    height: auto;
+    padding-bottom: 30px;
+  }
+  .hero-banner p {
+    font-size: 20px;
+  }
+  .card-edu {
+    padding: 1.2rem 0.7rem;
+  }
+  .owl-anim {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .hero-banner {
+    padding: 1.5rem 0.5rem;
+    border-radius: 0 0 120px 120px;
+  }
+
+  .hero-banner::before {
+    background-size: 700px;
+    background-position: 50% 30%;
+  }
+
+  .hero-banner h1 {
+    font-size: 60px;
+    height: auto;
+    padding-bottom: 40px;
+    line-height: 1;
+  }
+
+  .hero-banner p {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+}

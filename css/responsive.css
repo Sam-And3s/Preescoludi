@@ -1,0 +1,19 @@
+/* responsive.css - Ajustes adicionales para responsividad */
+@media (max-width: 992px) {
+  .navbar-edu .navbar-brand {
+    font-size: 1.5rem;
+  }
+  .card-edu {
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-edu .navbar-brand {
+    font-size: 1.1rem;
+  }
+  .btn-edu {
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+  }
+}

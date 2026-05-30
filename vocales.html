@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Aprende las Vocales! - Preescoludi</title>
+  <link rel="icon" href="assets/images/cabezabuho.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vocales.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+  
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <span style="font-family: var(--font-title); font-weight: 900; font-size: 2.2rem;">
+          <span style="color:#7C4DFF;">P</span><span style="color:#FF4081;">r</span><span style="color:#f4b82e;">e</span><span style="color:#4CAF50;">e</span><span style="color:#29B6F6;">s</span><span style="color:#7C4DFF;">c</span><span style="color:#FF4081;">o</span><span style="color:#FFB300;">l</span><span style="color:#29B6F6;">u</span><span style="color:#7C4DFF;">d</span><span style="color:#FF4081;">i</span>
+        </span>
+      </a>
+      <a href="index.html" class="btn-back-home d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
+        <span>Inicio</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container text-center mb-5">
+    <h1 class="font-banner-vocales mb-3">
+      <span>V</span><span>o</span><span>c</span><span>a</span><span>l</span><span>e</span><span>s</span>
+    </h1>
+    <p class="lead mb-4 text-secondary" style="font-family: var(--font-body); font-weight: 700;">
+      ¡Diviertete aprendiendo y jugando con las vocales!
+    </p>
+  </section>
+
+  <!-- Section 1: Discover & Draw Vocales -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">✏️ Descubre y Dibuja las Vocales</h2>
+    <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instr1vocales.ogg')" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
+    </button>
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Vowel Cards -->
+      <div class="col-12 col-md-5 col-lg-3 d-flex flex-column gap-3 justify-content-center">
+        <!-- Card A -->
+        <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #ff5252;" onclick="selectVowel('a', '🐝', 'abeja', 'linear-gradient(135deg, #ff8a80, #ff1744)', '#ffffff')">
+          <span class="vowel-letter" style="color: #ff1744;">a</span>
+          <p class="vowel-example text-secondary">abeja 🐝</p>
+        </div>
+
+        <!-- Card E -->
+        <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #29b6f6;" onclick="selectVowel('e', '🐘', 'elefante', 'linear-gradient(135deg, #80d8ff, #29b6f6)', '#ffffff')">
+          <span class="vowel-letter" style="color: #0288d1;">e</span>
+          <p class="vowel-example text-secondary">elefante 🐘</p>
+        </div>
+
+        <!-- Card I -->
+        <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #ffd600;" onclick="selectVowel('i', '🦎', 'iguana', 'linear-gradient(135deg, #ffe082, #ffd600)', '#333333')">
+          <span class="vowel-letter" style="color: #f57f17;">i</span>
+          <p class="vowel-example text-secondary">iguana 🦎</p>
+        </div>
+
+        <!-- Card O -->
+        <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #4caf50;" onclick="selectVowel('o', '🐻', 'oso', 'linear-gradient(135deg, #b9f6ca, #4caf50)', '#ffffff')">
+          <span class="vowel-letter" style="color: #2e7d32;">o</span>
+          <p class="vowel-example text-secondary">oso 🐻</p>
+        </div>
+
+        <!-- Card U -->
+        <div class="vowel-card text-center d-flex align-items-center justify-content-between px-4 py-3" style="--color-border: #ea80fc;" onclick="selectVowel('u', '🦄', 'unicornio', 'linear-gradient(135deg, #ea80fc, #d500f9)', '#ffffff')">
+          <span class="vowel-letter" style="color: #aa00ff;">u</span>
+          <p class="vowel-example text-secondary">unicornio 🦄</p>
+        </div>
+      </div>
+
+      <!-- Vowel Display Canvas -->
+      <div class="col-12 col-md-7 col-lg-5">
+        <div class="vowel-display-canvas" id="vowelDisplay">
+          <span class="vowel-display-emoji" id="vowelEmoji">🎈</span>
+          <h3 class="vowel-display-letter" id="vowelTitle">¡Elige una!</h3>
+          <p class="vowel-display-word" id="vowelWord">Selecciona una vocal</p>
+          <p class="text-secondary text-center mt-2" id="vowelHint" style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 700;">
+            Toca las tarjetas para oír su sonido y ver un lindo dibujo.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tracing Chalkboard -->
+      <div class="col-12 col-lg-4">
+        <div class="tracing-container">
+          <div class="chalkboard-header">
+            <h3 class="chalkboard-title">🖍️ Pizarra de Trazo</h3>
+            <div class="chalk-colors">
+              <button class="chalk-btn selected" style="background: #ffffff;" onclick="changeChalkColor('#ffffff', this)"></button>
+              <button class="chalk-btn" style="background: #ff5252;" onclick="changeChalkColor('#ff5252', this)"></button>
+              <button class="chalk-btn" style="background: #ffd600;" onclick="changeChalkColor('#ffd600', this)"></button>
+              <button class="chalk-btn" style="background: #4caf50;" onclick="changeChalkColor('#4caf50', this)"></button>
+              <button class="chalk-btn" style="background: #29b6f6;" onclick="changeChalkColor('#29b6f6', this)"></button>
+            </div>
+          </div>
+          
+          <div class="tracing-canvas-wrapper">
+            <canvas id="tracingCanvas"></canvas>
+            <div class="tracing-guide" id="canvasGuide">a</div>
+          </div>
+
+          <div class="text-center mt-3">
+            <button class="btn-clear-chalk" onclick="clearChalkboardWithAudio()">🧼 Borrar Pizarra</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 2: Vowel Drag and Drop Classification Game -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🍏 ¡Asocia y Selecciona!</h2>
+    <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instr2vocales.ogg')" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="drag-game-container">
+          <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700; font-size: 1.15rem;">
+            Toca la vocal correcta que indique con cual comienza la palabra de la imagen.
+          </p>
+
+          <!-- Surprise Box containing the Draggable Card -->
+          <div class="drag-surprise-box" id="dragSurpriseBox">
+            <div class="draggable-card" id="dragCard">
+              <span class="draggable-card-emoji" id="dragEmoji">🐝</span>
+              <p class="draggable-card-label" id="dragLabel">abeja</p>
+            </div>
+          </div>
+
+          <!-- Baskets/Slots Row -->
+          <div class="row g-3 justify-content-center mt-4">
+            <!-- Basket A -->
+            <div class="col-4 col-sm-2">
+              <div class="basket-slot" id="basket_a" style="--color-border: #ff5252;" onclick="selectBasketTap('a')">
+                <span class="basket-letter">a</span>
+                <span class="basket-label">abeja 🐝</span>
+              </div>
+            </div>
+
+            <!-- Basket E -->
+            <div class="col-4 col-sm-2">
+              <div class="basket-slot" id="basket_e" style="--color-border: #29b6f6;" onclick="selectBasketTap('e')">
+                <span class="basket-letter">e</span>
+                <span class="basket-label">elefante 🐘</span>
+              </div>
+            </div>
+
+            <!-- Basket I -->
+            <div class="col-4 col-sm-2">
+              <div class="basket-slot" id="basket_i" style="--color-border: #ffd600;" onclick="selectBasketTap('i')">
+                <span class="basket-letter" style="color: #f57f17;">i</span>
+                <span class="basket-label">iguana 🦎</span>
+              </div>
+            </div>
+
+            <!-- Basket O -->
+            <div class="col-4 col-sm-2">
+              <div class="basket-slot" id="basket_o" style="--color-border: #4caf50;" onclick="selectBasketTap('o')">
+                <span class="basket-letter">o</span>
+                <span class="basket-label">oso 🐻</span>
+              </div>
+            </div>
+
+            <!-- Basket U -->
+            <div class="col-4 col-sm-2">
+              <div class="basket-slot" id="basket_u" style="--color-border: #ea80fc;" onclick="selectBasketTap('u')">
+                <span class="basket-letter" style="color: #aa00ff;">u</span>
+                <span class="basket-label">uvas 🍇</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between align-items-center px-3">
+            <span style="font-family: var(--font-title); font-size: 1.25rem; color: var(--color-primary); font-weight: 700;" id="dragScore">
+              Estrellas de clasificación: ⭐ 0
+            </span>
+            <button class="btn btn-edu py-2 px-4 fs-6" onclick="loadNextDragItem()">
+              🔄 Cambiar dibujo
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Vowel Guessing Game (Quiz) -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🎮 ¡Completa la Palabra!</h2>
+    <button class="speech-badge" onclick="reproducirAudioRuta('assets/audio/instr3vocales.ogg')" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <div class="quiz-container">
+          <!-- Active Game View -->
+          <div id="quizActiveView">
+            <span class="quiz-word-emoji" id="quizEmoji">🦊</span>
+            <p class="lead text-secondary mb-2" style="font-family: var(--font-body); font-weight: 700;">
+              ¿Qué vocal falta para completar el nombre de este dibujo?
+            </p>
+            
+            <div class="quiz-word-box">
+              <span id="quizPart1">L</span>
+              <span class="quiz-letter-slot" id="quizSlot">❓</span>
+              <span id="quizPart2">N</span>
+            </div>
+
+            <!-- A, E, I, O, U Buttons -->
+            <div class="d-flex justify-content-center gap-3 flex-wrap mt-4">
+              <button class="quiz-vowel-btn" style="background: #ff5252; --color-border: #ff1744;" onclick="submitVowelGuess('a')">a</button>
+              <button class="quiz-vowel-btn" style="background: #29b6f6; --color-border: #0288d1;" onclick="submitVowelGuess('e')">e</button>
+              <button class="quiz-vowel-btn" style="background: #ffd600; --color-border: #f57f17; color: #333333;" onclick="submitVowelGuess('i')">i</button>
+              <button class="quiz-vowel-btn" style="background: #4caf50; --color-border: #2e7d32;" onclick="submitVowelGuess('o')">o</button>
+              <button class="quiz-vowel-btn" style="background: #ea80fc; --color-border: #aa00ff;" onclick="submitVowelGuess('u')">u</button>
+            </div>
+
+            <div class="mt-4 d-flex justify-content-between align-items-center px-3">
+              <span style="font-family: var(--font-title); font-size: 1.25rem; color: var(--color-primary); font-weight: 700;" id="quizScore">
+                Estrellas ganadas: ⭐ 0
+              </span>
+              <button class="btn btn-edu py-2 px-4 fs-6" onclick="loadNextQuiz()">
+                🔄 Siguiente palabra
+              </button>
+            </div>
+          </div>
+
+          <!-- Victory / Reset View -->
+          <div id="quizVictoryView" style="display: none;">
+            <span class="quiz-word-emoji" style="font-size: 6rem; display: block; margin-bottom: 1rem; animation: float-deco 3s ease-in-out infinite;">🏆</span>
+            <h3 style="font-family: var(--font-title); font-weight: 900; color: var(--color-success); font-size: 2.2rem;" class="mb-3">
+              ¡Increíble! ¡Eres una Súper Estrella! ⭐
+            </h3>
+            <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700;">
+              Completaste las 15 palabras correctamente y ganaste 15 estrellas mágicas.
+            </p>
+            <button class="btn btn-edu py-3 px-5 fs-5" style="border: 3px solid #fff; box-shadow: var(--shadow-md); border-radius: var(--radius-md);" onclick="resetQuizGame()">
+              🔄 Reiniciar el juego
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="dragCompletionScreen" style="display:none;">
+  <div class="text-center p-4">
+    <h2>🌟 ¡Excelente trabajo! 🌟</h2>
+    <p>Has conseguido 10 estrellas.</p>
+
+    <button class="btn btn-edu" onclick="restartDragGame()">
+      🔄 Jugar otra vez
+    </button>
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-5"
+    style="background:#fff; border-radius:var(--radius-lg) var(--radius-lg) 0 0; box-shadow:var(--shadow-sm);">
+    <span style="font-family:var(--font-title); color:var(--color-accent); font-weight: 700;">
+      Desarrollado por @SkahnowTech<span style="color:var(--color-primary);"> ♥</span>
+    </span>
+  </footer>
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // --- Speech Synthesis Utility ---
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Cancel any current speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        
+        // Find Spanish voice
+        const voices = window.speechSynthesis.getVoices();
+        const esVoice = voices.find(v => v.lang.startsWith('es'));
+        if (esVoice) utterance.voice = esVoice;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Force voice list loading in Chrome/Safari
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    // --- Section 1: Discover Vowels Logic ---
+    let currentVowelName = 'a';
+    
+    function selectVowel(letter, emoji, word, gradient, textColor) {
+      currentVowelName = letter;
+      const display = document.getElementById('vowelDisplay');
+      const emojiEl = document.getElementById('vowelEmoji');
+      const titleEl = document.getElementById('vowelTitle');
+      const wordEl = document.getElementById('vowelWord');
+      const hintEl = document.getElementById('vowelHint');
+
+      // Update Showcase Canvas Styles & Content
+      display.style.background = gradient;
+      display.style.borderColor = '#ffffff';
+      emojiEl.textContent = emoji;
+      titleEl.textContent = letter;
+      titleEl.style.color = textColor;
+      wordEl.textContent = word;
+      wordEl.style.color = textColor;
+      hintEl.style.color = textColor === '#ffffff' ? 'rgba(255,255,255,0.85)' : '#666666';
+      
+      const descriptions = {
+        'a': '¡La vocal a! De la hermosa abejita que hace miel. 🐝',
+        'e': '¡La vocal e! Del gran elefante de trompa larga. 🐘',
+        'i': '¡La vocal i! De la verde iguana que sube al árbol. 🦎',
+        'o': '¡La vocal o! Del lindo osito de peluche. 🐻',
+        'u': '¡La vocal u! Del mágico unicornio de colores. 🦄'
+      };
+      
+      hintEl.textContent = descriptions[letter] || '';
+
+      // Confetti Blast
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+
+      // Update Chalkboard Guide Letter
+      document.getElementById('canvasGuide').textContent = letter;
+      clearChalkboard();
+
+
+
+      const audios = {
+        'a': 'assets/audio/vocal_a.ogg',
+        'e': 'assets/audio/vocal_e.ogg',
+        'i': 'assets/audio/vocal_i.ogg',
+        'o': 'assets/audio/vocal_o.ogg',
+        'u': 'assets/audio/vocal_u.ogg'
+        };
+
+        const audio = new Audio(audios[letter]);
+
+        audio.play().catch(() => {
+        console.log('El navegador bloqueó la reproducción automática.');
+        });
+    }
+
+    // --- Tracing Chalkboard Logic ---
+    const canvas = document.getElementById('tracingCanvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let chalkColor = '#ffffff';
+
+    // Make canvas responsive
+    function resizeCanvas() {
+      // Get the bounding box of wrapper
+      const wrapper = canvas.parentElement;
+      canvas.width = wrapper.clientWidth;
+      canvas.height = wrapper.clientHeight;
+      
+      // Re-configure context styles
+      ctx.strokeStyle = chalkColor;
+      ctx.lineWidth = 14;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+    }
+
+    function changeChalkColor(color, btnEl) {
+
+    chalkColor = color;
+    ctx.strokeStyle = color;
+
+    const colorAudios = {
+        '#ffffff': 'assets/audio/blanco.ogg',
+        '#ff5252': 'assets/audio/rojo.ogg',
+        '#ffd600': 'assets/audio/amarillo.ogg',
+        '#4caf50': 'assets/audio/verde.ogg',
+        '#29b6f6': 'assets/audio/azul.ogg'
+    };
+
+    reproducirAudioRuta(colorAudios[color]);
+
+    document.querySelectorAll('.chalk-btn')
+        .forEach(btn => btn.classList.remove('selected'));
+
+    btnEl.classList.add('selected');
+    }
+
+    function clearChalkboard() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function clearChalkboardWithAudio() {
+    clearChalkboard();
+
+    const audio = new Audio('assets/audio/pizarra_limpia.ogg');
+    audio.play();
+    }
+
+    // Drawing coordinates resolver
+    function getEventCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      if (e.touches && e.touches.length > 0) {
+        return {
+          x: e.touches[0].clientX - rect.left,
+          y: e.touches[0].clientY - rect.top
+        };
+      }
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const coords = getEventCoords(e);
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault(); // Stop mobile scroll
+      const coords = getEventCoords(e);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Canvas Events Binding
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    canvas.addEventListener('touchstart', startDrawing, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', stopDrawing);
+
+    // Initial setup on load
+    window.addEventListener('DOMContentLoaded', () => {
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+    
+      
+      // Load first Quiz item
+      loadNextQuiz();
+    });
+
+    // --- Section 2: Completion Word Quiz Logic ---
+    const quizWords = [
+      { vowel: 'e', part1: 'ab', part2: 'ja', emoji: '🐝', word: 'abeja', phrase: '¡abeja! Comienza con a.' },
+      { vowel: 'i', part1: 'av', part2: 'o n', emoji: '🛩️', word: 'avión', phrase: '¡avión! Comienza con a.' },
+      { vowel: 'a', part1: 'p', part2: 't o', emoji: '🦆', word: 'pato', phrase: '¡pato! Lleva la vocal a en el medio.' },
+      
+      { vowel: 'e', part1: '', part2: 'l e f a n t e', emoji: '🐘', word: 'elefante', phrase: '¡elefante! Comienza con e.' },
+      { vowel: 'e', part1: 'estr', part2: 'l l a', emoji: '⭐', word: 'estrella', phrase: '¡estrella! Comienza con e.' },
+      { vowel: 'e', part1: 'p', part2: 'r r o', emoji: '🐶', word: 'perro', phrase: '¡perro! Lleva la vocal e en el medio.' },
+      
+      { vowel: 'i', part1: '', part2: 'g u a n a', emoji: '🦎', word: 'iguana', phrase: '¡iguana! Comienza con i.' },
+      { vowel: 'i', part1: '', part2: 's l a', emoji: '🏝️', word: 'isla', phrase: '¡isla! Comienza con i.' },
+      { vowel: 'i', part1: 'l', part2: 'm ó n', emoji: '🍋', word: 'limón', phrase: '¡limón! Lleva la vocal i en el medio.' },
+      
+      { vowel: 'o', part1: '', part2: 's o', emoji: '🐻', word: 'oso', phrase: '¡oso! Comienza con o.' },
+      { vowel: 'o', part1: '', part2: 'j o', emoji: '👁️', word: 'ojo', phrase: '¡ojo! Comienza con o.' },
+      { vowel: 'o', part1: 'm', part2: 'n o', emoji: '🐵', word: 'mono', phrase: '¡mono! Lleva la vocal o en el medio.' },
+      
+      { vowel: 'u', part1: '', part2: 'n i c o r n i o', emoji: '🦄', word: 'unicornio', phrase: '¡unicornio! Comienza con u.' },
+      { vowel: 'u', part1: '', part2: 'v a s', emoji: '🍇', word: 'uvas', phrase: '¡uvas! Comienza con u.' },
+      { vowel: 'u', part1: 'l', part2: 'n a', emoji: '🌙', word: 'luna', phrase: '¡luna! Lleva la vocal u en el medio.' }
+    ];
+
+    let currentQuizIndex = 0;
+    let starsScore = 0;
+    let playedQuizIndices = [];
+
+    function resetQuizGame() {
+      playedQuizIndices = [];
+      starsScore = 0;
+      document.getElementById('quizScore').textContent = `Estrellas ganadas: ⭐ ${starsScore}`;
+      document.getElementById('quizVictoryView').style.display = 'none';
+      document.getElementById('quizActiveView').style.display = 'block';
+      loadNextQuiz();
+    }
+
+    function showQuizCompletionScreen() {
+      document.getElementById('quizActiveView').style.display = 'none';
+      document.getElementById('quizVictoryView').style.display = 'block';
+
+      // Play continuous confetti rain
+      const duration = 4 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+
+      reproducirAudioRuta('assets/audio/felicitaciones.ogg')
+    }
+
+    function loadNextQuiz() {
+      // Clear pointer events & states
+      const buttons = document.querySelectorAll('.quiz-vowel-btn');
+      buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+
+      // Check if all words have been played
+      if (playedQuizIndices.length >= quizWords.length) {
+        showQuizCompletionScreen();
+        return;
+      }
+
+      // Randomly select next word, ensuring it hasn't been played yet
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * quizWords.length);
+      } while (playedQuizIndices.includes(randomIndex));
+
+      currentQuizIndex = randomIndex;
+      const activeWordObj = quizWords[currentQuizIndex];
+
+      // Update HTML Elements
+      document.getElementById('quizEmoji').textContent = activeWordObj.emoji;
+      document.getElementById('quizPart1').textContent = activeWordObj.part1;
+      document.getElementById('quizPart2').textContent = activeWordObj.part2;
+      
+      const slot = document.getElementById('quizSlot');
+      slot.textContent = '❓';
+      slot.className = 'quiz-letter-slot';
+    }
+
+    function submitVowelGuess(vowelSelected) {
+      const activeWordObj = quizWords[currentQuizIndex];
+      const slot = document.getElementById('quizSlot');
+      const buttons = document.querySelectorAll('.quiz-vowel-btn');
+
+      // Disable clicks to prevent double triggers
+      buttons.forEach(btn => btn.style.pointerEvents = 'none');
+
+      if (vowelSelected === activeWordObj.vowel) {
+        // Correct answer!
+        slot.textContent = vowelSelected;
+        slot.className = 'quiz-letter-slot filled';
+        
+        // Add to played indices list so it is NOT repeated
+        if (!playedQuizIndices.includes(currentQuizIndex)) {
+          playedQuizIndices.push(currentQuizIndex);
+        }
+        
+        starsScore += 1;
+        document.getElementById('quizScore').textContent = `Estrellas ganadas: ⭐ ${starsScore}`;
+
+        // Confetti explosion
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+
+        // Speak success
+        reproducirAudioRuta('assets/audio/muybien.ogg')
+
+        // Automatically load next after 3 seconds
+        setTimeout(() => {
+          if (playedQuizIndices.length >= quizWords.length) {
+            showQuizCompletionScreen();
+          } else {
+            loadNextQuiz();
+          }
+        }, 3000);
+
+      } else {
+        // Wrong answer
+        slot.textContent = vowelSelected;
+        slot.className = 'quiz-letter-slot text-danger';
+        
+        // Jiggle shake active slot
+        slot.style.animation = 'shake 0.5s ease-in-out';
+        
+        reproducirAudioRuta('assets/audio/vuelveintentarlo.ogg')
+
+        // Re-enable clicks after wobble completes
+        setTimeout(() => {
+          slot.style.animation = 'flash-slot 1.5s infinite alternate';
+          slot.textContent = '❓';
+          slot.className = 'quiz-letter-slot';
+          buttons.forEach(btn => btn.style.pointerEvents = 'auto');
+        }, 1000);
+      }
+    }
+
+    const dragItems = [
+    { emoji: "🐝", palabra: "_beja", vocal: "a" },
+    { emoji: "🐘", palabra: "_lefante", vocal: "e" },
+    { emoji: "🦎", palabra: "_guana", vocal: "i" },
+    { emoji: "🐻", palabra: "_so", vocal: "o" },
+    { emoji: "🍇", palabra: "_vas", vocal: "u" },
+
+    { emoji: "✈️", palabra: "_vión", vocal: "a" },
+    { emoji: "⭐", palabra: "_strella", vocal: "e" },
+    { emoji: "⛪", palabra: "_glesia", vocal: "i" },
+    { emoji: "👁️", palabra: "_jo", vocal: "o" },
+    { emoji: "💅", palabra: "_ñas", vocal: "u" }
+];
+
+let currentItem = null;
+let score = 0;
+
+const emojiElement = document.getElementById("dragEmoji");
+const labelElement = document.getElementById("dragLabel");
+const scoreElement = document.getElementById("dragScore");
+let playedDragIndices = [];
+
+function loadNextDragItem() {
+
+    if(playedDragIndices.length === dragItems.length){
+        playedDragIndices = [];
+    }
+
+    let randomIndex;
+
+    do {
+        randomIndex = Math.floor(Math.random() * dragItems.length);
+    }
+    while(playedDragIndices.includes(randomIndex));
+
+    playedDragIndices.push(randomIndex);
+
+    currentItem = dragItems[randomIndex];
+
+    emojiElement.textContent = currentItem.emoji;
+    labelElement.textContent = currentItem.palabra;
+
+    limpiarCanastas();
+}
+
+function showDragCompletionScreen() {
+
+    reproducirAudioRuta('assets/audio/lolograste.ogg');
+
+    document.querySelector('.drag-game-container').innerHTML = `
+        <div class="text-center p-4">
+            <h2>🌟 ¡Excelente trabajo! 🌟</h2>
+            <p>Has conseguido 10 estrellas.</p>
+
+            <button class="btn btn-edu" onclick="restartDragGame()">
+                🔄 Jugar otra vez
+            </button>
+        </div>
+    `;
+}
+
+function limpiarCanastas() {
+
+    document.querySelectorAll(".basket-slot").forEach(slot => {
+        slot.classList.remove("correct");
+        slot.classList.remove("wrong");
+    });
+
+}
+
+    function selectBasketTap(vocalSeleccionada) {
+
+        if (!currentItem) return;
+
+        const basket = document.getElementById(`basket_${vocalSeleccionada}`);
+
+        if (vocalSeleccionada === currentItem.vocal) {
+
+            basket.classList.add("correct");
+
+            reproducirAudioRuta('assets/audio/muybien.ogg');
+
+            score++;
+
+            scoreElement.textContent =
+                `Estrellas de clasificación: ⭐ ${score}`;
+
+            // Verificar victoria
+            if(score >= 10){
+
+                setTimeout(() => {
+                    showDragCompletionScreen();
+                }, 2000);
+
+                return;
+            }
+
+            setTimeout(() => {
+                loadNextDragItem();
+            }, 1500);
+
+        } else {
+
+            basket.classList.add("wrong");
+
+            reproducirAudioRuta('assets/audio/sigueintentando.ogg');
+
+            setTimeout(() => {
+                basket.classList.remove("wrong");
+            }, 800);
+
+        }
+    }
+
+    loadNextDragItem();
+
+    let audioActual = null;
+
+    function reproducirAudioRuta(ruta) {
+
+        if (audioActual) {
+            audioActual.pause();
+            audioActual.currentTime = 0;
+        }
+
+        audioActual = new Audio(ruta);
+        audioActual.play();
+    }
+
+    function restartDragGame() {
+
+        score = 0;
+
+        playedDragIndices = [];
+
+        scoreElement.textContent =
+        'Estrellas de clasificación: ⭐ 0';
+
+        location.reload();
+    }
+  </script>
+</body>
+
+</html>

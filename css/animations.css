@@ -1,0 +1,78 @@
+/* animations.css - Microanimaciones y decoraciones */
+@keyframes float-deco {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-18px) scale(1.08); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.floating-deco {
+  animation: float-deco 3.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,64,129,0.3); }
+  70% { box-shadow: 0 0 0 16px rgba(255,64,129,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,64,129,0); }
+}
+
+.btn-edu.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Card click pop effect */
+@keyframes card-pop {
+  0% { transform: translateY(-6px) scale(1.03); }
+  50% { transform: translateY(-12px) scale(1.08); }
+  100% { transform: translateY(-6px) scale(1.03); }
+}
+
+.card-edu.playing {
+  animation: card-pop 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-color: var(--color-primary) !important;
+}
+
+/* Audio status notification toast */
+.audio-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  box-shadow: 0 10px 25px rgba(124, 77, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  font-family: var(--font-body);
+  transform: translateY(100px) scale(0.8);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.audio-toast.show {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.audio-toast-icon {
+  font-size: 1.5rem;
+  background: var(--color-secondary);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.audio-toast-content {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 700;
+}
+
