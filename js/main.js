@@ -127,19 +127,6 @@ document.querySelectorAll('.btn-juego').forEach(boton => {
 
 });
 
-let bienvenidaReproducida = false;
-
-document.addEventListener('click', () => {
-
-    if (bienvenidaReproducida) return;
-
-    bienvenidaReproducida = true;
-
-    setTimeout(() => {
-        reproducirAudioRuta('assets/audio/inicio_pag.ogg');
-    }, 100);
-
-}, { once: true });
 
 // Audio routing helper
     let audioActual = null;
@@ -159,6 +146,13 @@ document.addEventListener('click', () => {
       });
     }
 
-window.addEventListener("DOMContentLoaded", () => {
+    function playIntroInstruction() {
+      // Plays instrucNumeros.ogg if exists, else fallback to TTS
       reproducirAudioRuta('assets/audio/inicio_pag.ogg');
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        playIntroInstruction();
+      }, 500);
     });
