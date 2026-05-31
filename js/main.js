@@ -128,6 +128,7 @@ document.querySelectorAll('.btn-juego').forEach(boton => {
 });
 
 
+
 // Audio routing helper
     let audioActual = null;
     function reproducirAudioRuta(ruta, callback = null) {
