@@ -15,7 +15,7 @@
     rel="stylesheet">
 </head>
 
-<body>
+<body onload="aplicarFuenteGlobal()">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
     <div class="container">
@@ -121,7 +121,7 @@
           </div>
 
           <div class="mt-4 d-flex justify-content-between align-items-center px-3 flex-wrap gap-2">
-            <span style="font-family: var(--font-title); font-size: 1.25rem; color: var(--color-primary); font-weight: 700;" id="countingScore">
+            <span style="font-family: var(--font-title); font-size: 1.25rem; color: var(--color-primary); font-weight: 700;" id="countingScore" class="especial-47">
               Estrellas ganadas: ⭐ 0
             </span>
             <button class="btn btn-edu py-2 px-4 fs-6" onclick="loadNextCountingItem()">
@@ -298,9 +298,9 @@
         const card = document.createElement("div");
         card.className = "number-card";
         card.style.setProperty("--color-border", item.border);
+        card.innerHTML = aplicarFuenteEspecial(`<span class="number-display-val">${i.toString()}</span>`);
         card.onclick = () => selectNumber(i);
 
-        card.innerHTML = `<span class="number-display-val">${i}</span>`;
         grid.appendChild(card);
       }
     }
@@ -315,7 +315,7 @@
       display.style.borderColor = "#ffffff";
 
       const valEl = document.getElementById("numberValue");
-      valEl.textContent = data.val;
+      valEl.innerHTML = aplicarFuenteEspecial(data.val.toString());
       valEl.style.color = data.textC;
 
       // Populate emojis
@@ -338,12 +338,11 @@
       });
 
       // Update chalkboard stencil
-      document.getElementById("canvasGuide").textContent = data.val;
-      clearChalkboard();
+      document.getElementById("canvasGuide").innerHTML = aplicarFuenteEspecial(data.val.toString());
 
       // Audio route play
       reproducirAudioRuta(`assets/audio/${num}.ogg`, () => {
-        reproducirAudioRuta(`assets/audio/num${data.val}`);
+        reproducirAudioRuta(`assets/audio/num${data.val}.ogg`);
       });
     }
 
@@ -442,13 +441,17 @@
     function buildCountingOptions() {
       const grid = document.getElementById("countingOptionsGrid");
       grid.innerHTML = "";
+      
+      
 
       for (let i = 1; i <= 10; i++) {
         const btn = document.createElement("button");
         btn.className = "counting-option-btn";
         btn.id = `count_opt_${i}`;
         btn.textContent = i;
+        btn.innerHTML = aplicarFuenteEspecial(i.toString());
         btn.onclick = () => submitCountingOption(i);
+        
 
         grid.appendChild(btn);
       }
@@ -488,6 +491,7 @@
         selectedBtn.classList.add("correct");
         countingStars += 1;
         document.getElementById("countingScore").textContent = `Estrellas ganadas: ⭐ ${countingStars}`;
+        aplicarFuenteGlobal();
 
         // Confetti burst
         confetti({
@@ -595,7 +599,7 @@
         if (item === "❓") {
           container.innerHTML += `<div class="sequence-slot-mystery" id="seqMystery">❓</div>`;
         } else {
-          container.innerHTML += `<div class="sequence-item">${item}</div>`;
+          container.innerHTML += aplicarFuenteEspecial(`<div class="sequence-item">${item.toString()}</div>`);
         }
       });
 
@@ -616,7 +620,7 @@
         const btn = document.createElement("button");
         btn.className = "sequence-option-btn";
         btn.id = `seq_opt_${opt}`;
-        btn.textContent = opt;
+        btn.innerHTML = aplicarFuenteEspecial(opt.toString());
         btn.onclick = () => submitSequenceOption(opt);
 
         optionsRow.appendChild(btn);
@@ -635,11 +639,11 @@
       if (selectedVal === sequenceCorrectVal) {
         // Correct!
         selectedBtn.classList.add("correct");
-        mysterySlot.textContent = selectedVal;
+        mysterySlot.innerHTML = aplicarFuenteEspecial(selectedVal.toString());
         mysterySlot.className = "sequence-slot-mystery filled";
 
         quizStars += 1;
-        document.getElementById("quizScore").textContent = `Estrellas ganadas: ⭐ ${quizStars}`;
+        document.getElementById("quizScore").innerHTML = aplicarFuenteEspecial(`Estrellas ganadas: ⭐ ${quizStars.toString()}`);
 
         // Confetti blast
         confetti({
@@ -721,6 +725,20 @@
       buildCountingOptions();
       loadNextCountingItem();
     });
+
+    function aplicarFuenteEspecial(texto) {
+      return texto.replace(/[47]/g, numero =>
+        `<span class="numero-especial">${numero}</span>`
+      );
+    }
+
+    function aplicarFuenteGlobal() {
+      document.querySelectorAll(".especial-47").forEach(el => {
+        el.innerHTML = aplicarFuenteEspecial(el.textContent);
+      });
+    }
+
+    
 
   </script>
 </body>
