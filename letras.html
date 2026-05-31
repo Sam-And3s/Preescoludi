@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Aprende las Letras! - Preescoludi</title>
+  <link rel="icon" href="assets/images/cabezabuho.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/letras.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <span style="font-family: var(--font-title); font-weight: 900; font-size: 2.2rem;">
+          <span style="color:#7C4DFF;">P</span><span style="color:#FF4081;">r</span><span style="color:#f4b82e;">e</span><span style="color:#4CAF50;">e</span><span style="color:#29B6F6;">s</span><span style="color:#7C4DFF;">c</span><span style="color:#FF4081;">o</span><span style="color:#FFB300;">l</span><span style="color:#29B6F6;">u</span><span style="color:#7C4DFF;">d</span><span style="color:#FF4081;">i</span>
+        </span>
+      </a>
+      <a href="index.html" class="btn-back-home d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
+        <span>Inicio</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container text-center mb-5">
+    <h1 class="font-banner-letras mb-3">
+      <span>L</span><span>e</span><span>t</span><span>r</span><span>a</span><span>s</span>
+    </h1>
+    <p class="lead mb-4 text-secondary" style="font-family: var(--font-body); font-weight: 700;">
+      <span style="color: black;">¡Diviértete aprendiendo, dibujando y escuchando las letras!</span>
+    </p>
+  </section>
+
+  <!-- Actividad 1: Descubre y Dibuja las Letras -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">✏️ Descubre y dibuja las letras</h2>
+    <button class="speech-badge" onclick="speakInstruction(1)" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="Instrucción">
+    </button>
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Letters Grid Board Column -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="letter-board-grid" id="lettersGrid">
+          <!-- Dynamically populated cards will be placed here -->
+        </div>
+      </div>
+
+      <!-- Letter Display Showcase Column -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="letter-display-canvas" id="letterDisplay">
+          <span class="letter-display-emoji" id="letterEmoji">🎈</span>
+          <h3 class="letter-display-char" id="letterChar">¡Elige una!</h3>
+          <p class="letter-display-word" id="letterWord">Selecciona una letra</p>
+          <p class="text-secondary text-center mt-2" id="letterHint" style="font-family: var(--font-body); font-size: 0.95rem; font-weight: 700;">
+            <span style="color: black;">Elige una letra para oír su sonido y ver su dibujo animado.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Tracing Chalkboard Column -->
+      <div class="col-12 col-lg-4">
+        <div class="tracing-container">
+          <div class="chalkboard-header">
+            <h3 class="chalkboard-title">🖍️ Pizarra de trazo</h3>
+            <div class="chalk-colors">
+              <button class="chalk-btn selected" style="background: #ffffff;" onclick="changeChalkColor('#ffffff', this)"></button>
+              <button class="chalk-btn" style="background: #ff5252;" onclick="changeChalkColor('#ff5252', this)"></button>
+              <button class="chalk-btn" style="background: #ffd600;" onclick="changeChalkColor('#ffd600', this)"></button>
+              <button class="chalk-btn" style="background: #4caf50;" onclick="changeChalkColor('#4caf50', this)"></button>
+              <button class="chalk-btn" style="background: #29b6f6;" onclick="changeChalkColor('#29b6f6', this)"></button>
+            </div>
+          </div>
+          
+          <div class="tracing-canvas-wrapper">
+            <canvas id="tracingCanvas" width="300" height="300"></canvas>
+            <div class="tracing-guide" id="canvasGuide"></div>
+          </div>
+
+          <div class="text-center mt-3">
+            <button class="btn-clear-chalk" onclick="clearChalkboardWithAudio()">🧼 Borrar pizarra</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Actividad 2: Espacio Maquetado para Personalización -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🧩 ¡Juego de memoria!</h2>
+    <button class="speech-badge" onclick="speakInstruction(2)" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="Instrucción">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        <!-- CONTENEDOR PREPARADO Y MAQUETADO LISTO PARA INSERTAR ACTIVIDAD 2 -->
+        <div class="placeholder-game-container" id="actividad-2-personalizada">
+            <iframe style="max-width:100%" src="https://wordwall.net/es/embed/6edcf0326cab4dc7b92f06f07adee84a?themeId=65&templateId=25&fontStackId=0" width="500" height="380" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Actividad 3: Quiz Auditivo / Adivina por el Sonido -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🎮 ¡Escucha y adivina la letra!</h2>
+    <button class="speech-badge" onclick="speakInstruction(3)" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="Instrucción">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 quiz-wrapper">
+        
+        <!-- Quiz Welcome / Overlay Start View -->
+        <div id="quizOverlay" class="quiz-overlay">
+          <div class="quiz-overlay-content">
+            <span style="font-size: 5.5rem; display: block; margin-bottom: 15px; animation: float-deco 3s ease-in-out infinite;">🦊</span>
+            <h3>🎮 El Reto de las Letras</h3>
+            <p>Escucha con mucha atención el sonido de la letra y toca cuál es la correcta. ¡Consigue 10 estrellas mágicas!</p>
+            <button class="btn btn-edu" onclick="startQuizGame()">
+              ▶️ Iniciar Juego
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Quiz Box Container -->
+        <div class="quiz-container" id="quizActiveView" style="display: none;">
+          <div class="quiz-speaker-box" id="quizSpeaker" onclick="playCurrentQuizSound()">
+            <span>🔊</span>
+          </div>
+          <p class="quiz-question-text" id="quizQuestion">¿Qué letra suena así? Toca el altavoz para escuchar de nuevo.</p>
+
+          <!-- 4 option buttons grid -->
+          <div class="quiz-options-grid" id="quizOptionsGrid">
+            <!-- Populated dynamically via javascript -->
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between align-items-center px-3 flex-wrap gap-2">
+            <span class="quiz-score-stars" id="quizScore">
+              Estrellas ganadas: ⭐ 0
+            </span>
+            <button class="btn btn-edu py-2 px-4 fs-6" onclick="loadNextQuizItem()">
+              🔄 Cambiar letra
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz victory view -->
+        <div class="quiz-container text-center p-5" id="quizVictoryView" style="display: none;">
+          <span style="font-size: 6rem; display: block; margin-bottom: 1rem; animation: float-deco 3s ease-in-out infinite;">🏆</span>
+          <h3 style="font-family: var(--font-title); font-weight: 900; color: var(--color-success); font-size: 2.2rem;" class="mb-3">
+            ¡Increíble! ¡Eres una Súper Estrella! ⭐
+          </h3>
+          <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700;">
+            <span style="color: black;">Completaste las 10 preguntas correctamente y ganaste 10 estrellas mágicas.</span>
+          </p>
+          <button class="btn btn-edu py-3 px-5 fs-5" style="border: 3px solid #fff; box-shadow: var(--shadow-md); border-radius: var(--radius-md);" onclick="resetQuizGame()">
+            🔄 Reiniciar el juego
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-5"
+    style="background:#fff; border-radius:var(--radius-lg) var(--radius-lg) 0 0; box-shadow:var(--shadow-sm);">
+    <span style="font-family:var(--font-title); color:var(--color-accent); font-weight: 700;">
+      Desarrollado por @SkahnowTech<span style="color:var(--color-primary);"> ♥</span>
+    </span>
+  </footer>
+
+  <!-- Confetti and Bootstrap JS Bundle CDNs -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // --- Speech Synthesis Utility ---
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        
+        const voices = window.speechSynthesis.getVoices();
+        const esVoice = voices.find(v => v.lang.startsWith('es'));
+        if (esVoice) utterance.voice = esVoice;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    // Audio routing helper
+    let audioActual = null;
+    function reproducirAudioRuta(ruta, callback = null) {
+      if (audioActual) {
+        audioActual.pause();
+        audioActual.currentTime = 0;
+      }
+
+      audioActual = new Audio(ruta);
+      audioActual.onended = () => {
+        if (callback) callback();
+      };
+      audioActual.play().catch(err => {
+        console.warn(`No se pudo reproducir el audio: ${ruta}. Ejecutando fallback.`, err);
+        if (callback) callback();
+      });
+    }
+
+    // Narration instructions speaker
+    function speakInstruction(index) {
+      const instructions = {
+        1: 'assets/audio/ins1Letra.ogg',
+        2: 'assets/audio/ins2Letra.ogg',
+        3: 'assets/audio/ins3Letra.ogg'
+      };
+      reproducirAudioRuta(instructions[index]);
+    }
+
+    // --- Core Letters Data ---
+    const lettersData = {
+      m: {
+        upper: "M", lower: "m",
+        emoji: "🍎", word: "manzana",
+        description: "¡La letra M! De la dulce manzana roja. 🍎",
+        gradient: "linear-gradient(135deg, #ff8a80, #ff1744)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "mmm", nameSpoken: "letra M"
+      },
+      p: {
+        upper: "P", lower: "p",
+        emoji: "🐶", word: "perro",
+        description: "¡La letra P! De tu adorable y juguetón perrito. 🐶",
+        gradient: "linear-gradient(135deg, #80d8ff, #29b6f6)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "pe", nameSpoken: "letra P"
+      },
+      s: {
+        upper: "S", lower: "s",
+        emoji: "☀️", word: "sol",
+        description: "¡La letra S! Del brillante sol que nos da calor. ☀️",
+        gradient: "linear-gradient(135deg, #ffe082, #ffd600)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "sss", nameSpoken: "letra S"
+      },
+      t: {
+        upper: "T", lower: "t",
+        emoji: "🐢", word: "tortuga",
+        description: "¡La letra T! De la sabia tortuga que va despacito. 🐢",
+        gradient: "linear-gradient(135deg, #b9f6ca, #4caf50)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "te", nameSpoken: "letra T"
+      },
+      n: {
+        upper: "N", lower: "n",
+        emoji: "☁️", word: "nube",
+        description: "¡La letra N! De la esponjosa nube blanca en el cielo. ☁️",
+        gradient: "linear-gradient(135deg, #ea80fc, #d500f9)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "nnn", nameSpoken: "letra N"
+      },
+      l: {
+        upper: "L", lower: "l",
+        emoji: "🦁", word: "león",
+        description: "¡La letra L! Del valiente león, el rey de la selva. 🦁",
+        gradient: "linear-gradient(135deg, #ffb74d, #f57c00)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "lll", nameSpoken: "letra L"
+      },
+      f: {
+        upper: "F", lower: "f",
+        emoji: "🌸", word: "flor",
+        description: "¡La letra F! De la hermosa y perfumada flor del jardín. 🌸",
+        gradient: "linear-gradient(135deg, #f8bbd0, #ec407a)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "fff", nameSpoken: "letra F"
+      },
+      r: {
+        upper: "R", lower: "r",
+        emoji: "🐭", word: "ratón",
+        description: "¡La letra R! Del veloz ratón que come queso. 🐭",
+        gradient: "linear-gradient(135deg, #d7ccc8, #8d6e63)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "rrr", nameSpoken: "letra R"
+      },
+      d: {
+        upper: "D", lower: "d",
+        emoji: "🎲", word: "dado",
+        description: "¡La letra D! Del divertido dado para tus juegos favoritos. 🎲",
+        gradient: "linear-gradient(135deg, #b2ebf2, #00bcd4)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "de", nameSpoken: "letra D"
+      },
+      b: {
+        upper: "B", lower: "b",
+        emoji: "🦉", word: "búho",
+        description: "¡La letra B! Del sabio búho que te enseña a aprender. 🦉",
+        gradient: "linear-gradient(135deg, #d1c4e9, #673ab7)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "be", nameSpoken: "letra B"
+      },
+      z: {
+        upper: "Z", lower: "z",
+        emoji: "🦊", word: "zorro",
+        description: "¡La letra Z! Del astuto zorro naranja del bosque. 🦊",
+        gradient: "linear-gradient(135deg, #ffccbc, #ff5722)",
+        textColor: "#ffffff",
+        hintColor: "rgba(255, 255, 255, 0.8)",
+        phonics: "zzz", nameSpoken: "letra Z"
+      }
+    };
+
+    const targetKeys = ["m", "p", "s", "t", "n", "l", "f", "r", "d", "b", "z"];
+    let activeLetterKey = null;
+
+    // Build letter grid on page load
+    function populateLetterBoard() {
+      const grid = document.getElementById("lettersGrid");
+      grid.innerHTML = "";
+
+      targetKeys.forEach(key => {
+        const item = lettersData[key];
+        
+        const card = document.createElement("div");
+        card.className = "letter-card";
+        card.style.setProperty("--color-border", item.textColor === "#333333" ? "#f57f17" : "#7c4dff");
+        card.onclick = () => selectLetter(key);
+
+        card.innerHTML = `
+          <div class="letter-display-name">
+            <span class="upper" style="color: ${item.textColor === '#333333' ? '#f57f17' : '#7c4dff'}">${item.upper}</span>
+            <span class="lower" style="color: ${item.textColor === '#333333' ? '#e65100' : '#ff4081'}">${item.lower}</span>
+          </div>
+          <p class="letter-display-example">${item.emoji} ${item.word}</p>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function selectLetter(letterKey) {
+      activeLetterKey = letterKey;
+      const data = lettersData[letterKey];
+
+      // Update Showcase Visual Display
+      const display = document.getElementById("letterDisplay");
+      display.style.background = data.gradient;
+      display.style.borderColor = "#ffffff";
+
+      document.getElementById("letterEmoji").textContent = data.emoji;
+
+      const charEl = document.getElementById("letterChar");
+      charEl.textContent = `${data.upper}${data.lower}`;
+      charEl.style.color = data.textColor;
+
+      const wordEl = document.getElementById("letterWord");
+      wordEl.textContent = data.word;
+      wordEl.style.color = data.textColor;
+
+      const hintEl = document.getElementById("letterHint");
+      hintEl.textContent = data.description;
+      hintEl.style.color = data.hintColor;
+
+      // Confetti splash
+      confetti({
+        particleCount: 50,
+        spread: 65,
+        origin: { y: 0.6 }
+      });
+
+      // Update Chalkboard Guide Text
+      document.getElementById("canvasGuide").textContent = `${data.upper}${data.lower}`;
+      clearChalkboard();
+
+      // Audio trigger
+      reproducirAudioRuta(`assets/audio/letra_${letterKey}.ogg`);
+    }
+
+    // --- Chalkboard Tracing Logic ---
+    const canvas = document.getElementById("tracingCanvas");
+    const ctx = canvas.getContext("2d");
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let chalkColor = "#ffffff";
+
+    function configureCanvas() {
+      ctx.strokeStyle = chalkColor;
+      ctx.lineWidth = 14;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+    }
+
+    function changeChalkColor(color, btnEl) {
+      chalkColor = color;
+      ctx.strokeStyle = color;
+
+      const colorAudios = {
+        '#ffffff': 'assets/audio/blanco.ogg',
+        '#ff5252': 'assets/audio/rojo.ogg',
+        '#ffd600': 'assets/audio/amarillo.ogg',
+        '#4caf50': 'assets/audio/verde.ogg',
+        '#29b6f6': 'assets/audio/azul.ogg'
+      };
+
+      reproducirAudioRuta(colorAudios[color]);
+
+      document.querySelectorAll(".chalk-btn").forEach(btn => btn.classList.remove("selected"));
+      btnEl.classList.add("selected");
+    }
+
+    function clearChalkboard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function clearChalkboardWithAudio() {
+      clearChalkboard();
+      reproducirAudioRuta("assets/audio/pizarra_limpia.ogg");
+    }
+
+    function getEventCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: ((clientX - rect.left) / rect.width) * canvas.width,
+        y: ((clientY - rect.top) / rect.height) * canvas.height
+      };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const coords = getEventCoords(e);
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getEventCoords(e);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
+
+    canvas.addEventListener("touchstart", startDrawing, { passive: false });
+    canvas.addEventListener("touchmove", draw, { passive: false });
+    canvas.addEventListener("touchend", stopDrawing);
+
+
+    // --- EXPERIENCE 3: Phonetic Quiz Game ---
+    let quizStars = 0;
+    let currentQuizKey = null;
+    let playedQuizKeys = [];
+
+    function startQuizGame() {
+      document.getElementById("quizOverlay").style.display = "none";
+      document.getElementById("quizActiveView").style.display = "block";
+      
+      speakInstruction(3);
+      loadNextQuizItem();
+    }
+
+    function loadNextQuizItem() {
+      // Clean classes
+      document.querySelectorAll(".quiz-option-btn").forEach(btn => {
+        btn.classList.remove("correct", "wrong");
+        btn.style.pointerEvents = "auto";
+      });
+
+      if (playedQuizKeys.length >= 10) {
+        showQuizVictoryScreen();
+        return;
+      }
+
+      // Choose random letter key, ensure it wasn't played in this cycle
+      let randomKey;
+      do {
+        randomKey = targetKeys[Math.floor(Math.random() * targetKeys.length)];
+      } while (playedQuizKeys.includes(randomKey));
+
+      playedQuizKeys.push(randomKey);
+      currentQuizKey = randomKey;
+
+      playCurrentQuizSound();
+      populateQuizOptions();
+    }
+
+    function playCurrentQuizSound() {
+      if (!currentQuizKey) return;
+      const data = lettersData[currentQuizKey];
+
+      // Try local phonetics sound first, then fallback to SpeechSynthesis
+      reproducirAudioRuta(`assets/audio/${currentQuizKey}.ogg`);
+    }
+
+    function populateQuizOptions() {
+      const grid = document.getElementById("quizOptionsGrid");
+      grid.innerHTML = "";
+
+      // Construct a list of 4 options (1 correct, 3 distractor)
+      const options = [currentQuizKey];
+      
+      while (options.length < 4) {
+        const randomKey = targetKeys[Math.floor(Math.random() * targetKeys.length)];
+        if (!options.includes(randomKey)) {
+          options.push(randomKey);
+        }
+      }
+
+      // Shuffle options randomly
+      options.sort(() => Math.random() - 0.5);
+
+      options.forEach(optionKey => {
+        const btn = document.createElement("button");
+        btn.className = "quiz-option-btn";
+        btn.id = `option_${optionKey}`;
+        btn.onclick = () => submitQuizOption(optionKey);
+
+        const data = lettersData[optionKey];
+        btn.innerHTML = `<span>${data.upper} ${data.lower}</span>`;
+
+        grid.appendChild(btn);
+      });
+    }
+
+    function submitQuizOption(selectedKey) {
+      const selectedBtn = document.getElementById(`option_${selectedKey}`);
+      
+      // Prevent clicking until transition resolves
+      document.querySelectorAll(".quiz-option-btn").forEach(btn => {
+        btn.style.pointerEvents = "none";
+      });
+
+      if (selectedKey === currentQuizKey) {
+        // Correct answer!
+        selectedBtn.classList.add("correct");
+        quizStars += 1;
+        document.getElementById("quizScore").textContent = `Estrellas ganadas: ⭐ ${quizStars}`;
+
+        // Confetti burst
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+
+        reproducirAudioRuta("assets/audio/muybien.ogg");
+
+        setTimeout(() => {
+          if (quizStars >= 10) {
+            showQuizVictoryScreen();
+          } else {
+            loadNextQuizItem();
+          }
+        }, 2000);
+      } else {
+        // Wrong answer
+        selectedBtn.classList.add("wrong");
+        reproducirAudioRuta("assets/audio/vuelveintentarlo.ogg");
+
+        setTimeout(() => {
+          selectedBtn.classList.remove("wrong");
+          document.querySelectorAll(".quiz-option-btn").forEach(btn => {
+            btn.style.pointerEvents = "auto";
+          });
+        }, 1000);
+      }
+    }
+
+    function showQuizVictoryScreen() {
+      document.getElementById("quizActiveView").style.display = "none";
+      document.getElementById("quizVictoryView").style.display = "block";
+
+      reproducirAudioRuta("assets/audio/felicitaciones.ogg");
+      triggerVictoryConfettiRain();
+    }
+
+    function resetQuizGame() {
+      quizStars = 0;
+      playedQuizKeys = [];
+      document.getElementById("quizScore").textContent = `Estrellas ganadas: ⭐ 0`;
+      document.getElementById("quizVictoryView").style.display = "none";
+      document.getElementById("quizOverlay").style.display = "flex";
+    }
+
+    function triggerVictoryConfettiRain() {
+      const duration = 3.5 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.7 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.7 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+
+
+    // --- Global Init ---
+    window.addEventListener("DOMContentLoaded", () => {
+      populateLetterBoard();
+      configureCanvas();
+    });
+  </script>
+</body>
+
+</html>

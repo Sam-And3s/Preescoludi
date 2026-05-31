@@ -126,3 +126,25 @@ document.querySelectorAll('.btn-juego').forEach(boton => {
     });
 
 });
+
+// Audio routing helper
+    let audioActual = null;
+    function reproducirAudioRuta(ruta, callback = null) {
+      if (audioActual) {
+        audioActual.pause();
+        audioActual.currentTime = 0;
+      }
+
+      audioActual = new Audio(ruta);
+      audioActual.onended = () => {
+        if (callback) callback();
+      };
+      audioActual.play().catch(err => {
+        console.warn(`No se pudo reproducir el audio: ${ruta}. Ejecutando fallback.`, err);
+        if (callback) callback();
+      });
+    }
+
+window.addEventListener("DOMContentLoaded", () => {
+      reproducirAudioRuta('assets/audio/inicio_pag.ogg');
+    });
