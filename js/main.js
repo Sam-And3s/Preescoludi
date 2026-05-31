@@ -158,7 +158,3 @@ document.addEventListener('click', () => {
         if (callback) callback();
       });
     }
-
-window.addEventListener("DOMContentLoaded", () => {
-      reproducirAudioRuta('assets/audio/inicio_pag.ogg');
-    });
