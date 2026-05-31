@@ -159,13 +159,6 @@ document.addEventListener('click', () => {
       });
     }
 
-    function playIntroInstruction() {
-      // Plays instrucNumeros.ogg if exists, else fallback to TTS
+window.addEventListener("DOMContentLoaded", () => {
       reproducirAudioRuta('assets/audio/inicio_pag.ogg');
-    }
-
-    window.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        playIntroInstruction();
-      }, 500);
     });
