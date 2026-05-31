@@ -59,8 +59,8 @@
       
       <!-- Option 1: Numbers 1 to 10 -->
       <div class="col-12 col-md-5">
-        <a href="numeros1_10.html" class="hub-card" style="--color-border: #29b6f6;" onclick="playAudioRedirect('assets/audio/numeros.ogg', event, 'numeros1_10.html')">
-          <span class="hub-card-emoji">1️⃣ 2️⃣ 3️⃣</span>
+        <a href="numeros1_10.html" class="hub-card" style="--color-border: #29b6f6;" onclick="playAudioRedirect('assets/audio/numeros1_10.ogg', event, 'numeros1_10.html')">
+          <span class="hub-card-emoji">1️⃣ 2️⃣ 3️⃣...</span>
           <h2 class="hub-card-title" style="color: #0288d1;">Números del 1 al 10</h2>
           <p class="hub-card-desc">Aprende a trazar, contar objetos divertidos y resolver secuencias mágicas de números.</p>
         </a>
@@ -68,7 +68,7 @@
 
       <!-- Option 2: Number Families -->
       <div class="col-12 col-md-5">
-        <a href="familiaNumeros.html" class="hub-card" style="--color-border: #ff4081;" onclick="playAudioRedirect('assets/audio/numeros.ogg', event, 'familiaNumeros.html')">
+        <a href="familiaNumeros.html" class="hub-card" style="--color-border: #ff4081;" onclick="playAudioRedirect('assets/audio/numerosFamilias.ogg', event, 'familiaNumeros.html')">
           <span class="hub-card-emoji">🏠 🔢 🎈</span>
           <h2 class="hub-card-title" style="color: #ff4081;">Familia de Números</h2>
           <p class="hub-card-desc">Explora las casitas de las familias del 10 al 90, revienta globos flotantes y arma rompecabezas.</p>
@@ -129,9 +129,7 @@
     // Explains the choice
     function playIntroInstruction() {
       // Plays instrucNumeros.ogg if exists, else fallback to TTS
-      reproducirAudioRuta('assets/audio/instrucNumeros.ogg', () => {
-        speakText("¡Hola amiguito! Elige si quieres jugar con los números del uno al diez, o conocer las grandiosas familias de los números.");
-      });
+      reproducirAudioRuta('assets/audio/instrucNumeros.ogg');
     }
 
     // Play sound before redirecting

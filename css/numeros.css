@@ -88,7 +88,7 @@ body {
 }
 
 .hub-card-emoji {
-  font-size: 6rem;
+  font-size: 3rem;
   margin-bottom: 20px;
   animation: float-deco 3s ease-in-out infinite;
   display: inline-block;
@@ -137,3 +137,65 @@ body {
   50% { transform: scale(1.08); box-shadow: 0 0 25px rgba(124, 77, 255, 0.9); }
   100% { transform: scale(1); box-shadow: 0 0 0 rgba(124, 77, 255, 0.7); }
 }
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .hub-card {
+    padding: 2rem 1.5rem;
+    border-radius: 2rem;
+  }
+  
+  .hub-card-emoji {
+    font-size: 4.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .hub-card-title {
+    font-size: 1.6rem;
+  }
+  
+  .hub-card-desc {
+    font-size: 1rem;
+  }
+
+  .speaker-hub-badge {
+    width: 80px;
+    height: 80px;
+  }
+
+  .speaker-hub-badge img {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .hub-card {
+    padding: 1.5rem 1rem;
+    border-radius: 1.5rem;
+  }
+
+  .hub-card-emoji {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+  }
+
+  .hub-card-title {
+    font-size: 1.4rem;
+  }
+
+  .hub-card-desc {
+    font-size: 0.95rem;
+  }
+
+  .speaker-hub-badge {
+    width: 70px;
+    height: 70px;
+  }
+
+  .speaker-hub-badge img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+

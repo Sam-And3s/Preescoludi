@@ -52,18 +52,18 @@
     <div class="row g-4 justify-content-center">
       
       <!-- Numbers grid sidebar -->
-      <div class="col-12 col-md-5 col-lg-3">
+      <div class="col-12 col-md-5 col-lg-4">
         <div class="number-board-grid" id="numbersGrid">
           <!-- Populated dynamically via JS -->
         </div>
       </div>
 
       <!-- Numbers central showcase display -->
-      <div class="col-12 col-md-7 col-lg-5">
+      <div class="col-12 col-md-7 col-lg-4">
         <div class="number-display-canvas" id="numberDisplay">
-          <h3 class="number-display-value-giant" id="numberValue">1</h3>
-          <div class="number-display-items-grid" id="numberItemsGrid">🍎</div>
-          <p class="number-display-hint" id="numberHint">¡El número uno! Como una rica manzana roja.</p>
+          <h3 class="number-display-value-giant" id="numberValue">¡Elige!</h3>
+          <div class="number-display-items-grid" id="numberItemsGrid">Selecciona un número</div>
+          <p class="number-display-hint" id="numberHint">Toca las tarjetas para ver el número y la cantidad de dibujos.</p>
         </div>
       </div>
 
@@ -83,7 +83,7 @@
           
           <div class="tracing-canvas-wrapper">
             <canvas id="tracingCanvas" width="300" height="300"></canvas>
-            <div class="tracing-guide" id="canvasGuide">1</div>
+            <div class="tracing-guide" id="canvasGuide"></div>
           </div>
 
           <div class="text-center mt-3">
@@ -218,6 +218,9 @@
     </span>
   </footer>
 
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
   <script>
     // --- Speech Synthesis Utility ---
     function speakText(text) {
@@ -266,16 +269,8 @@
         2: "assets/audio/ins2Numeros10.ogg",
         3: "assets/audio/ins3Numeros10.ogg"
       };
-      // Fallback instruction text if audio fails to play
-      const fallbacks = {
-        1: "¡Hola amiguito! Elige un número de la izquierda para ver cuántos objetos representa, escuchar su nombre y divertirte trazándolo en la pizarra de tiza.",
-        2: "¡Es hora de contar! Cuenta con tu dedito cuántos dibujos hay en la pantalla y pulsa el botón del número correcto para ganar estrellas mágicas.",
-        3: "¡Secuencias mágicas! Mira los números ordenados en el tren y adivina qué número hace falta en la casilla de interrogación. ¡Gana diez estrellas!"
-      };
 
-      reproducirAudioRuta(instructions[index], () => {
-        speakText(fallbacks[index]);
-      });
+      reproducirAudioRuta(instructions[index]);
     }
 
     // --- EXPERIENCE 1: Discover & Trace Data ---
@@ -348,7 +343,7 @@
 
       // Audio route play
       reproducirAudioRuta(`assets/audio/${num}.ogg`, () => {
-        speakText(`Número ${data.val}. ${data.text}.`);
+        reproducirAudioRuta(`assets/audio/num${data.val}`);
       });
     }
 
@@ -721,9 +716,6 @@
     window.addEventListener("DOMContentLoaded", () => {
       populateNumbersBoard();
       configureCanvas();
-
-      // Default first select
-      selectNumber(1);
 
       // Build Counting options and load first item
       buildCountingOptions();

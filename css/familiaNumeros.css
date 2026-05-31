@@ -58,6 +58,18 @@ body {
 .font-banner-familias span:nth-child(6) { animation-delay: 0.6s; color: #ff1744; }
 .font-banner-familias span:nth-child(7) { animation-delay: 0.7s; color: #0288d1; }
 .font-banner-familias span:nth-child(8) { animation-delay: 0.8s; color: #f57f17; }
+.font-banner-familias span:nth-child(9) { animation-delay: 0.9s; color: #2e7d32; }
+.font-banner-familias span:nth-child(10) { animation-delay: 1.0s; color: #9c27b0; }
+.font-banner-familias span:nth-child(11) { animation-delay: 1.1s; color: #ff1744; }
+.font-banner-familias span:nth-child(12) { animation-delay: 1.2s; color: #0288d1; }
+.font-banner-familias span:nth-child(13) { animation-delay: 1.3s; color: #f57f17; }
+.font-banner-familias span:nth-child(14) { animation-delay: 1.4s; color: #2e7d32; }
+.font-banner-familias span:nth-child(15) { animation-delay: 1.5s; color: #9c27b0; }
+.font-banner-familias span:nth-child(16) { animation-delay: 1.6s; color: #ff1744; }
+.font-banner-familias span:nth-child(17) { animation-delay: 1.7s; color: #0288d1; }
+.font-banner-familias span:nth-child(18) { animation-delay: 1.8s; color: #f57f17; }
+.font-banner-familias span:nth-child(19) { animation-delay: 1.9s; color: #2e7d32; }
+
 
 @keyframes bounce-letters-familias {
   0% { transform: translateY(0) rotate(0deg); }
@@ -223,6 +235,7 @@ body {
 
 /* Experience 3: Puzzle Grid board */
 .puzzle-board-container {
+  position: relative;
   background: #fff;
   border-radius: 2.5rem;
   border: 5px dashed var(--color-secondary);
@@ -414,3 +427,171 @@ body {
   20%, 60% { transform: translateX(-8px); }
   40%, 80% { transform: translateX(8px); }
 }
+
+/* Speech Badge Styling */
+.speech-badge {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  animation: palpitar-hub 1.2s infinite;
+}
+
+.speech-badge:hover {
+  background: var(--color-accent);
+  transform: scale(1.08) rotate(5deg);
+}
+
+.speech-badge img {
+  width: 80px !important;
+  height: 80px !important;
+}
+
+/* Floating Balloons Animation */
+@keyframes floatUp {
+  0% {
+    top: 100%;
+    transform: translateX(0) rotate(0deg);
+  }
+  20% {
+    transform: translateX(15px) rotate(4deg);
+  }
+  40% {
+    transform: translateX(-10px) rotate(-3deg);
+  }
+  60% {
+    transform: translateX(10px) rotate(3deg);
+  }
+  80% {
+    transform: translateX(-15px) rotate(-4deg);
+  }
+  100% {
+    top: -130px;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .number-card-giant {
+    width: 120px;
+    height: 120px;
+    font-size: 4rem;
+  }
+
+  .house-item-box {
+    width: 130px;
+    padding: 1.2rem 0.6rem;
+    border-radius: 2rem;
+  }
+
+  .house-graphic {
+    font-size: 3rem;
+  }
+
+  .house-label {
+    font-size: 1rem;
+  }
+
+  .balloon-element {
+    width: 75px;
+    height: 95px;
+    font-size: 1.8rem;
+  }
+
+  .balloon-element::after {
+    bottom: -13px;
+    left: 36px;
+    width: 3px;
+    height: 14px;
+  }
+
+  .speech-badge {
+    width: 80px;
+    height: 80px;
+  }
+
+  .speech-badge img {
+    width: 70px !important;
+    height: 70px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .number-card-giant {
+    width: 100px;
+    height: 100px;
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .houses-row {
+    gap: 10px;
+  }
+
+  .house-item-box {
+    width: 105px;
+    padding: 1rem 0.4rem;
+    border-radius: 1.5rem;
+  }
+
+  .house-graphic {
+    font-size: 2.4rem;
+  }
+
+  .house-label {
+    font-size: 0.85rem;
+  }
+
+  .balloon-element {
+    width: 60px;
+    height: 75px;
+    font-size: 1.4rem;
+  }
+
+  .balloon-element::after {
+    bottom: -10px;
+    left: 28px;
+    width: 2px;
+    height: 11px;
+  }
+
+  .puzzle-matrix-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+
+  .puzzle-bg-emoji {
+    font-size: 9rem;
+  }
+
+  .puzzle-slot {
+    font-size: 1.5rem;
+  }
+
+  .scrambled-tile-btn {
+    min-width: 48px;
+    font-size: 1.4rem;
+    padding: 0.5rem 0.3rem;
+  }
+
+  .speech-badge {
+    width: 70px;
+    height: 70px;
+  }
+
+  .speech-badge img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+
