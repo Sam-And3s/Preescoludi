@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Familias de Números</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Sans+MS&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/familiaNumeros.css" />
+  <!-- Confetti library for celebrations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+  <!-- Navbar (back to home) -->
+  <nav class="navbar navbar-custom fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">🏠 Preescoludi</a>
+      <a class="btn btn-back-home" href="index.html">Volver al inicio</a>
+    </div>
+  </nav>
+
+  <section class="container mt-5 pt-5">
+    <!-- Header animated title -->
+    <h1 class="font-banner-familias text-center mb-4">
+      <span>F</span><span>a</span><span>m</span><span>i</span><span>l</span><span>i</span><span>a</span><span>s</span>
+    </h1>
+    <p class="text-center fw-medium" style="font-family: var(--font-body); font-size: 1.2rem;">
+      ¡Aprende las familias de los números con juegos divertidos!
+    </p>
+  </section>
+
+  <!-- Game 1: House Sorting -->
+  <section class="container my-5">
+    <div class="sorting-game-container" id="game-house-sorting">
+      <h2 class="section-title">1️⃣ ¿A qué casa pertenece?</h2>
+      <div class="number-card-giant" id="giant-number"></div>
+      <div class="houses-row" id="houses-row"></div>
+    </div>
+  </section>
+
+  <!-- Game 2: Floating Balloons -->
+  <section class="container my-5">
+    <div class="balloons-area" id="game-balloons">
+      <h2 class="section-title">2️⃣ ¡Revienta los Globos!</h2>
+      <p class="text-center" id="balloon-instruction"></p>
+    </div>
+  </section>
+
+  <!-- Game 3: Puzzle Grid -->
+  <section class="container my-5">
+    <div class="puzzle-board-container" id="game-puzzle">
+      <h2 class="section-title">3️⃣ Rompecabezas Familiar</h2>
+      <div class="quiz-wrapper">
+        <div class="puzzle-matrix-wrapper">
+          <div class="puzzle-bg-img"><div class="puzzle-bg-emoji" id="puzzle-bg-emoji">🐶</div></div>
+          <div class="puzzle-matrix-grid" id="puzzle-grid"></div>
+          <div class="puzzle-cover-tile" id="puzzle-cover"></div>
+        </div>
+        <div class="puzzle-scrambled-tray" id="scrambled-tray"></div>
+        <div class="quiz-overlay" id="quiz-overlay" style="display:none;">
+          <div class="quiz-overlay-content">
+            <h3>¡Felicidades!</h3>
+            <p>Has completado el rompecabezas.</p>
+            <button class="btn btn-primary" id="restart-puzzle">Jugar de nuevo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core JavaScript -->
+  <script>
+    // Utility: play sound (fallback to SpeechSynthesis)
+    function playAudio(src, fallbackText) {
+      const audio = new Audio(src);
+      audio.play().catch(() => {
+        const utter = new SpeechSynthesisUtterance(fallbackText);
+        utter.lang = 'es-ES';
+        speechSynthesis.speak(utter);
+      });
+    }
+
+    // ---------- Game 1: House Sorting ----------
+    (function(){
+      const families = [20,40,60,80]; // possible families for demo
+      const giantEl = document.getElementById('giant-number');
+      const housesRow = document.getElementById('houses-row');
+
+      function startRound(){
+        // pick a random target number (10-99) that belongs to one of the families
+        const targetFamily = families[Math.floor(Math.random()*families.length)];
+        const targetNumber = targetFamily + Math.floor(Math.random()*10);
+        giantEl.textContent = targetNumber;
+        // generate three house options: one correct, two wrong
+        const correctHouse = targetFamily;
+        const wrongHouses = families.filter(f=>f!==correctHouse);
+        const options = [correctHouse, ...wrongHouses.slice(0,2)];
+        // shuffle options
+        for(let i=options.length-1;i>0;i--){
+          const j=Math.floor(Math.random()* (i+1));
+          [options[i],options[j]]=[options[j],options[i]];
+        }
+        housesRow.innerHTML='';
+        options.forEach(fam=>{
+          const div=document.createElement('div');
+          div.className='house-item-box';
+          div.innerHTML=`<div class="house-graphic">🏠</div><p class="house-label">Casa del ${fam}</p>`;
+          div.addEventListener('click',()=>{
+            if(fam===correctHouse){
+              div.classList.add('correct');
+              confetti();
+              playAudio('assets/audio/muybien.ogg','¡Muy bien!');
+              setTimeout(startRound,1500);
+            }else{
+              div.classList.add('wrong');
+              playAudio('assets/audio/vuelveintentarlo.ogg','Inténtalo de nuevo');
+            }
+          });
+          housesRow.appendChild(div);
+        });
+      }
+
+      function confetti(){
+        const end = Date.now() + 1000;
+        (function frame(){
+          confettiModule({particleCount:5,spread:70,origin:{x:Math.random(),y:Math.random() - 0.2}});
+          if (Date.now() < end) requestAnimationFrame(frame);
+        })();
+      }
+
+      // use global confetti from library
+      const confettiModule = window.confetti;
+      startRound();
+    })();
+
+    // ---------- Game 2: Floating Balloons ----------
+    (function(){
+      const families = [10,20,30,40,50,60,70,80,90];
+      const area = document.getElementById('game-balloons');
+      const instruction = document.getElementById('balloon-instruction');
+      let targetFamily;
+      let correctCount = 0;
+
+      function init(){
+        area.innerHTML='';
+        // pick target family
+        targetFamily = families[Math.floor(Math.random()*families.length)];
+        instruction.textContent = `Revienta los globos de la familia del ${targetFamily}`;
+        // create 8 balloons with random numbers
+        for(let i=0;i<8;i++){
+          const num = Math.floor(Math.random()*90)+10; // two‑digit
+          const div=document.createElement('div');
+          div.className='balloon-element';
+          div.style.background = `hsl(${Math.random()*360},70%,60%)`;
+          div.textContent = num;
+          div.dataset.num = num;
+          div.addEventListener('click',()=>{
+            const belongs = Math.floor(num/10)*10 === targetFamily;
+            if(belongs){
+              div.classList.add('popped');
+              correctCount++;
+              playAudio('assets/audio/muybien.ogg','¡Muy bien!');
+              confetti();
+              if(correctCount===5){
+                setTimeout(()=>{alert('¡Ganaste!'); init();},800);
+              }
+            }else{
+              playAudio('assets/audio/vuelveintentarlo.ogg','Inténtalo de nuevo');
+            }
+          });
+          // random position
+          const size = 90;
+          const x = Math.random()*(area.clientWidth - size);
+          const y = Math.random()*(area.clientHeight - size);
+          div.style.left = x + 'px';
+          div.style.top = y + 'px';
+          area.appendChild(div);
+        }
+      }
+
+      function confetti(){
+        const end = Date.now() + 800;
+        (function frame(){
+          confettiModule({particleCount:4,spread:60,origin:{x:Math.random(),y:Math.random() - 0.2}});
+          if (Date.now() < end) requestAnimationFrame(frame);
+        })();
+      }
+      const confettiModule = window.confetti;
+      init();
+    })();
+
+    // ---------- Game 3: Puzzle Grid ----------
+    (function(){
+      const families = [10,20,30,40,50,60,70,80,90];
+      const gridEl=document.getElementById('puzzle-grid');
+      const trayEl=document.getElementById('scrambled-tray');
+      const overlay=document.getElementById('quiz-overlay');
+      const restartBtn=document.getElementById('restart-puzzle');
+      const bgEmoji=document.getElementById('puzzle-bg-emoji');
+      let numbers=[]; // shuffled numbers
+      let currentIndex=0;
+
+      function start(){
+        overlay.style.display='none';
+        gridEl.innerHTML='';
+        trayEl.innerHTML='';
+        // pick random family
+        const family = families[Math.floor(Math.random()*families.length)];
+        // generate numbers family*10 .. family*10+9
+        const base = family;
+        numbers = Array.from({length:10},(_,i)=>base+i);
+        // shuffle for tray
+        const shuffled = [...numbers];
+        for(let i=shuffled.length-1;i>0;i--){
+          const j=Math.floor(Math.random()* (i+1));
+          [shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];
+        }
+        // create grid slots (hidden initially)
+        numbers.forEach(num=>{
+          const slot=document.createElement('div');
+          slot.className='puzzle-slot';
+          slot.dataset.value=num;
+          gridEl.appendChild(slot);
+        });
+        // create tray buttons
+        shuffled.forEach(num=>{
+          const btn=document.createElement('button');
+          btn.className='scrambled-tile-btn';
+          btn.textContent=num;
+          btn.dataset.value=num;
+          btn.addEventListener('click',()=>{
+            const expected=numbers[currentIndex];
+            if(num===expected){
+              btn.classList.add('correct');
+              // reveal slot
+              const slot=gridEl.children[currentIndex];
+              slot.textContent=num;
+              slot.classList.add('revealed');
+              currentIndex++;
+              if(currentIndex===numbers.length){
+                // success
+                bgEmoji.textContent='🎉';
+                overlay.style.display='flex';
+                confetti();
+              }
+            }else{
+              btn.classList.add('wrong');
+              playAudio('assets/audio/vuelveintentarlo.ogg','Inténtalo de nuevo');
+            }
+          });
+          trayEl.appendChild(btn);
+        });
+      }
+
+      function confetti(){
+        const end = Date.now() + 1200;
+        (function frame(){
+          confettiModule({particleCount:6,spread:80,origin:{x:Math.random(),y:Math.random() - 0.2}});
+          if (Date.now() < end) requestAnimationFrame(frame);
+        })();
+      }
+      const confettiModule = window.confetti;
+      restartBtn.addEventListener('click',start);
+      start();
+    })();
+  </script>
+</body>
+</html>

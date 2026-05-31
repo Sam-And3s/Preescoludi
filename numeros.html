@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Aprende los Números! - Preescoludi</title>
+  <link rel="icon" href="assets/images/cabezabuho.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/numeros.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <span style="font-family: var(--font-title); font-weight: 900; font-size: 2.2rem;">
+          <span style="color:#7C4DFF;">P</span><span style="color:#FF4081;">r</span><span style="color:#f4b82e;">e</span><span style="color:#4CAF50;">e</span><span style="color:#29B6F6;">s</span><span style="color:#7C4DFF;">c</span><span style="color:#FF4081;">o</span><span style="color:#FFB300;">l</span><span style="color:#29B6F6;">u</span><span style="color:#7C4DFF;">d</span><span style="color:#FF4081;">i</span>
+        </span>
+      </a>
+      <a href="index.html" class="btn-back-home d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
+        <span>Inicio</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container text-center mb-5">
+    <h1 class="font-banner-numeros mb-3">
+      <span>N</span><span>ú</span><span>m</span><span>e</span><span>r</span><span>o</span><span>s</span>
+    </h1>
+    <p class="lead mb-4 text-secondary" style="font-family: var(--font-body); font-weight: 700;">
+      <span style="color: black;">¡Elige una de las divertidas aventuras numéricas!</span>
+    </p>
+
+    <!-- Central instruction audio speaker badge -->
+    <div class="mt-2 mb-4 text-center">
+      <button class="speaker-hub-badge" onclick="playIntroInstruction()" aria-label="Escuchar instrucción">
+        <img src="assets/images/cabezabuho.png" width="80" height="80" alt="Búho">
+      </button>
+      <p class="mt-2 text-dark" style="font-family: var(--font-title); font-size: 1.1rem; font-weight: 700;">
+        ¡Toca al Búho para escuchar lo que debes hacer! 🦉
+      </p>
+    </div>
+  </section>
+
+  <!-- Selection Options Section -->
+  <section class="container mb-5">
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Option 1: Numbers 1 to 10 -->
+      <div class="col-12 col-md-5">
+        <a href="numeros1_10.html" class="hub-card" style="--color-border: #29b6f6;" onclick="playAudioRedirect('assets/audio/numeros.ogg', event, 'numeros1_10.html')">
+          <span class="hub-card-emoji">1️⃣ 2️⃣ 3️⃣</span>
+          <h2 class="hub-card-title" style="color: #0288d1;">Números del 1 al 10</h2>
+          <p class="hub-card-desc">Aprende a trazar, contar objetos divertidos y resolver secuencias mágicas de números.</p>
+        </a>
+      </div>
+
+      <!-- Option 2: Number Families -->
+      <div class="col-12 col-md-5">
+        <a href="familiaNumeros.html" class="hub-card" style="--color-border: #ff4081;" onclick="playAudioRedirect('assets/audio/numeros.ogg', event, 'familiaNumeros.html')">
+          <span class="hub-card-emoji">🏠 🔢 🎈</span>
+          <h2 class="hub-card-title" style="color: #ff4081;">Familia de Números</h2>
+          <p class="hub-card-desc">Explora las casitas de las familias del 10 al 90, revienta globos flotantes y arma rompecabezas.</p>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-5"
+    style="background:#fff; border-radius:var(--radius-lg) var(--radius-lg) 0 0; box-shadow:var(--shadow-sm);">
+    <span style="font-family:var(--font-title); color:var(--color-accent); font-weight: 700;">
+      Desarrollado por @SkahnowTech<span style="color:var(--color-primary);"> ♥</span>
+    </span>
+  </footer>
+
+  <script>
+    // Speech Synthesis utility
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        
+        const voices = window.speechSynthesis.getVoices();
+        const esVoice = voices.find(v => v.lang.startsWith('es'));
+        if (esVoice) utterance.voice = esVoice;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    let audioActual = null;
+    function reproducirAudioRuta(ruta, callback = null) {
+      if (audioActual) {
+        audioActual.pause();
+        audioActual.currentTime = 0;
+      }
+
+      audioActual = new Audio(ruta);
+      audioActual.onended = () => {
+        if (callback) callback();
+      };
+      audioActual.play().catch(err => {
+        console.warn(`No se pudo reproducir el audio: ${ruta}`, err);
+        if (callback) callback();
+      });
+    }
+
+    // Explains the choice
+    function playIntroInstruction() {
+      // Plays instrucNumeros.ogg if exists, else fallback to TTS
+      reproducirAudioRuta('assets/audio/instrucNumeros.ogg', () => {
+        speakText("¡Hola amiguito! Elige si quieres jugar con los números del uno al diez, o conocer las grandiosas familias de los números.");
+      });
+    }
+
+    // Play sound before redirecting
+    function playAudioRedirect(audioPath, event, destination) {
+      event.preventDefault();
+      reproducirAudioRuta(audioPath, () => {
+        window.location.href = destination;
+      });
+    }
+
+    // Auto play instruction on load (usually requires interaction, so fallback is active on user tap)
+    window.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        playIntroInstruction();
+      }, 500);
+    });
+  </script>
+</body>
+
+</html>

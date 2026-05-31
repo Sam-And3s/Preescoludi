@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Números del 1 al 10 - Preescoludi</title>
+  <link rel="icon" href="assets/images/cabezabuho.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/numeros1_10.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Nunito:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <span style="font-family: var(--font-title); font-weight: 900; font-size: 2.2rem;">
+          <span style="color:#7C4DFF;">P</span><span style="color:#FF4081;">r</span><span style="color:#f4b82e;">e</span><span style="color:#4CAF50;">e</span><span style="color:#29B6F6;">s</span><span style="color:#7C4DFF;">c</span><span style="color:#FF4081;">o</span><span style="color:#FFB300;">l</span><span style="color:#29B6F6;">u</span><span style="color:#7C4DFF;">d</span><span style="color:#FF4081;">i</span>
+        </span>
+      </a>
+      <a href="numeros.html" class="btn-back-home d-flex align-items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+          <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+        </svg>
+        <span>Atrás</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="container text-center mb-5">
+    <h1 class="font-banner-numeros10 mb-3">
+      <span>1</span><span>-</span><span>1</span><span>0</span>
+    </h1>
+    <p class="lead mb-4 text-secondary" style="font-family: var(--font-body); font-weight: 700;">
+      <span style="color: black;">¡Aprende a trazar, contar y ordenar los números del 1 al 10!</span>
+    </p>
+  </section>
+
+  <!-- Actividad 1: Descubre y Dibuja (1 al 10) -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">✏️ Descubre y dibuja los números</h2>
+    <button class="speech-badge" onclick="speakInstruction(1)" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="Instrucción">
+    </button>
+    <div class="row g-4 justify-content-center">
+      
+      <!-- Numbers grid sidebar -->
+      <div class="col-12 col-md-5 col-lg-3">
+        <div class="number-board-grid" id="numbersGrid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Numbers central showcase display -->
+      <div class="col-12 col-md-7 col-lg-5">
+        <div class="number-display-canvas" id="numberDisplay">
+          <h3 class="number-display-value-giant" id="numberValue">1</h3>
+          <div class="number-display-items-grid" id="numberItemsGrid">🍎</div>
+          <p class="number-display-hint" id="numberHint">¡El número uno! Como una rica manzana roja.</p>
+        </div>
+      </div>
+
+      <!-- Chalkboard Tracing -->
+      <div class="col-12 col-lg-4">
+        <div class="tracing-container">
+          <div class="chalkboard-header">
+            <h3 class="chalkboard-title">🖍️ Pizarra de trazo</h3>
+            <div class="chalk-colors">
+              <button class="chalk-btn selected" style="background: #ffffff;" onclick="changeChalkColor('#ffffff', this)"></button>
+              <button class="chalk-btn" style="background: #ff5252;" onclick="changeChalkColor('#ff5252', this)"></button>
+              <button class="chalk-btn" style="background: #ffd600;" onclick="changeChalkColor('#ffd600', this)"></button>
+              <button class="chalk-btn" style="background: #4caf50;" onclick="changeChalkColor('#4caf50', this)"></button>
+              <button class="chalk-btn" style="background: #29b6f6;" onclick="changeChalkColor('#29b6f6', this)"></button>
+            </div>
+          </div>
+          
+          <div class="tracing-canvas-wrapper">
+            <canvas id="tracingCanvas" width="300" height="300"></canvas>
+            <div class="tracing-guide" id="canvasGuide">1</div>
+          </div>
+
+          <div class="text-center mt-3">
+            <button class="btn-clear-chalk" onclick="clearChalkboardWithAudio()">🧼 Borrar pizarra</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Actividad 2: ¡Cuenta los dibujos! (Conteo) -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🍏 ¡Cuenta los dibujos!</h2>
+    <button class="speech-badge" onclick="speakInstruction(2)" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="Instrucción">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8">
+        
+        <!-- Active game box -->
+        <div class="counting-game-container" id="countingGameBox">
+          <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700; font-size: 1.15rem;">
+            <span style="color: black;">Cuenta con tu dedito cuántos dibujos hay y selecciona el número correcto.</span>
+          </p>
+
+          <!-- Display box with scrambled emojis -->
+          <div class="counting-display-box" id="countingDisplayBox">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- Buttons 1 to 10 arranged in a grid -->
+          <div class="counting-options-grid" id="countingOptionsGrid">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between align-items-center px-3 flex-wrap gap-2">
+            <span style="font-family: var(--font-title); font-size: 1.25rem; color: var(--color-primary); font-weight: 700;" id="countingScore">
+              Estrellas ganadas: ⭐ 0
+            </span>
+            <button class="btn btn-edu py-2 px-4 fs-6" onclick="loadNextCountingItem()">
+              🔄 Cambiar dibujos
+            </button>
+          </div>
+        </div>
+
+        <!-- Victory screen -->
+        <div class="counting-game-container text-center p-5" id="countingVictoryBox" style="display: none;">
+          <span style="font-size: 6rem; display: block; margin-bottom: 1rem; animation: float-deco 3s ease-in-out infinite;">🏆</span>
+          <h2 style="font-family: var(--font-title); font-weight: 900; color: var(--color-success); font-size: 2.2rem;" class="mb-3">
+            ¡Excelente contador! 🌟
+          </h2>
+          <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700;">
+            <span style="color: black;">Has contado los objetos de forma impecable y ganaste 10 estrellas mágicas.</span>
+          </p>
+          <button class="btn btn-edu py-3 px-5 fs-5" style="border: 3px solid #fff; box-shadow: var(--shadow-md); border-radius: var(--radius-md);" onclick="resetCountingGame()">
+            🔄 Jugar otra vez
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Actividad 3: Secuencias Mágicas (¿Qué número falta?) -->
+  <section class="container text-center mb-5">
+    <h2 class="section-title text-center">🎮 ¡Completa la secuencia!</h2>
+    <button class="speech-badge" onclick="speakInstruction(3)" style="margin-bottom: 20px;">
+      <img src="assets/images/cabezabuho.png" width="100" height="100" alt="Instrucción">
+    </button>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-10 col-lg-8 quiz-wrapper">
+        
+        <!-- Quiz Overlay Start Screen -->
+        <div id="quizOverlay" class="quiz-overlay">
+          <div class="quiz-overlay-content">
+            <span style="font-size: 5.5rem; display: block; margin-bottom: 15px; animation: float-deco 3s ease-in-out infinite;">🦊</span>
+            <h3>🎮 Secuencias Mágicas</h3>
+            <p>Mira la fila de números y adivina cuál es el número que falta. ¡Consigue 10 estrellas para ganar!</p>
+            <button class="btn btn-edu" onclick="startQuizGame()">
+              ▶️ Iniciar Juego
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Active Game View -->
+        <div class="quiz-container" id="quizActiveView" style="display: none;">
+          <p class="quiz-question-text">¿Qué número debe ir en la caja mágica con la interrogación?</p>
+          
+          <div class="sequence-box" id="sequenceBox">
+            <!-- 3 numbers and 1 puzzle slot populated via JS -->
+          </div>
+
+          <!-- Multiple choice circles row -->
+          <div class="sequence-options-row" id="sequenceOptionsRow">
+            <!-- Options populated dynamically -->
+          </div>
+
+          <div class="mt-4 d-flex justify-content-between align-items-center px-3 flex-wrap gap-2">
+            <span class="quiz-score-stars" id="quizScore">
+              Estrellas ganadas: ⭐ 0
+            </span>
+            <button class="btn btn-edu py-2 px-4 fs-6" onclick="loadNextQuizItem()">
+              🔄 Cambiar secuencia
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz victory screen -->
+        <div class="quiz-container text-center p-5" id="quizVictoryView" style="display: none;">
+          <span style="font-size: 6rem; display: block; margin-bottom: 1rem; animation: float-deco 3s ease-in-out infinite;">🏆</span>
+          <h3 style="font-family: var(--font-title); font-weight: 900; color: var(--color-success); font-size: 2.2rem;" class="mb-3">
+            ¡Súper Estrella del Orden! ⭐
+          </h3>
+          <p class="lead text-secondary mb-4" style="font-family: var(--font-body); font-weight: 700;">
+            <span style="color: black;">Has ordenado todas las secuencias mágicas correctamente y ganaste 10 estrellas.</span>
+          </p>
+          <button class="btn btn-edu py-3 px-5 fs-5" style="border: 3px solid #fff; box-shadow: var(--shadow-md); border-radius: var(--radius-md);" onclick="resetQuizGame()">
+            🔄 Reiniciar el juego
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-5"
+    style="background:#fff; border-radius:var(--radius-lg) var(--radius-lg) 0 0; box-shadow:var(--shadow-sm);">
+    <span style="font-family:var(--font-title); color:var(--color-accent); font-weight: 700;">
+      Desarrollado por @SkahnowTech<span style="color:var(--color-primary);"> ♥</span>
+    </span>
+  </footer>
+
+  <script>
+    // --- Speech Synthesis Utility ---
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        
+        const voices = window.speechSynthesis.getVoices();
+        const esVoice = voices.find(v => v.lang.startsWith('es'));
+        if (esVoice) utterance.voice = esVoice;
+        
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.getVoices();
+      };
+    }
+
+    // Audio routing helper
+    let audioActual = null;
+    function reproducirAudioRuta(ruta, callback = null) {
+      if (audioActual) {
+        audioActual.pause();
+        audioActual.currentTime = 0;
+      }
+
+      audioActual = new Audio(ruta);
+      audioActual.onended = () => {
+        if (callback) callback();
+      };
+      audioActual.play().catch(err => {
+        console.warn(`No se pudo reproducir el audio: ${ruta}. Ejecutando fallback.`, err);
+        if (callback) callback();
+      });
+    }
+
+    // Narration instructions
+    function speakInstruction(index) {
+      const instructions = {
+        1: "assets/audio/ins1Numeros10.ogg",
+        2: "assets/audio/ins2Numeros10.ogg",
+        3: "assets/audio/ins3Numeros10.ogg"
+      };
+      // Fallback instruction text if audio fails to play
+      const fallbacks = {
+        1: "¡Hola amiguito! Elige un número de la izquierda para ver cuántos objetos representa, escuchar su nombre y divertirte trazándolo en la pizarra de tiza.",
+        2: "¡Es hora de contar! Cuenta con tu dedito cuántos dibujos hay en la pantalla y pulsa el botón del número correcto para ganar estrellas mágicas.",
+        3: "¡Secuencias mágicas! Mira los números ordenados en el tren y adivina qué número hace falta en la casilla de interrogación. ¡Gana diez estrellas!"
+      };
+
+      reproducirAudioRuta(instructions[index], () => {
+        speakText(fallbacks[index]);
+      });
+    }
+
+    // --- EXPERIENCE 1: Discover & Trace Data ---
+    const numbersData = {
+      1: { val: 1, text: "uno", hint: "¡El número uno! Como una rica manzana roja. 🍎", emoji: "🍎", border: "#ff5252", gradient: "linear-gradient(135deg, #ff8a80, #ff1744)", textC: "#ffffff" },
+      2: { val: 2, text: "dos", hint: "¡El número dos! Como dos ositos cariñosos. 🐻 🐻", emoji: "🐻", border: "#29b6f6", gradient: "linear-gradient(135deg, #80d8ff, #29b6f6)", textC: "#ffffff" },
+      3: { val: 3, text: "tres", hint: "¡El número tres! Como tres lindos dinosaurios. 🦖 🦖 🦖", emoji: "🦖", border: "#ffd600", gradient: "linear-gradient(135deg, #ffe082, #ffd600)", textC: "#333333" },
+      4: { val: 4, text: "cuatro", hint: "¡El número cuatro! Como cuatro barquitos flotantes. ⛵ ⛵ ⛵ ⛵", emoji: "⛵", border: "#4caf50", gradient: "linear-gradient(135deg, #b9f6ca, #4caf50)", textC: "#ffffff" },
+      5: { val: 5, text: "cinco", hint: "¡El número cinco! Como las cinco estrellas del cielo. ⭐ ⭐ ⭐ ⭐ ⭐", emoji: "⭐", border: "#ea80fc", gradient: "linear-gradient(135deg, #ea80fc, #d500f9)", textC: "#ffffff" },
+      6: { val: 6, text: "seis", hint: "¡El número seis! Como seis abejitas haciendo miel. 🐝 🐝 🐝 🐝 🐝 🐝", emoji: "🐝", border: "#ffb74d", gradient: "linear-gradient(135deg, #ffb74d, #f57c00)", textC: "#ffffff" },
+      7: { val: 7, text: "siete", hint: "¡El número siete! Como los siete globos de colores. 🎈 🎈 🎈 🎈 🎈 🎈 🎈", emoji: "🎈", border: "#f8bbd0", gradient: "linear-gradient(135deg, #f8bbd0, #ec407a)", textC: "#ffffff" },
+      8: { val: 8, text: "ocho", hint: "¡El número ocho! Como ocho ricas galletas crujientes. 🍪 🍪 🍪 🍪 🍪 🍪 🍪 🍪", emoji: "🍪", border: "#d7ccc8", gradient: "linear-gradient(135deg, #d7ccc8, #8d6e63)", textC: "#ffffff" },
+      9: { val: 9, text: "nueve", hint: "¡El número nueve! Como los nueve peces nadando en el mar. 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟 🐟", emoji: "🐟", border: "#b2ebf2", gradient: "linear-gradient(135deg, #b2ebf2, #00bcd4)", textC: "#ffffff" },
+      10: { val: 10, text: "diez", hint: "¡El número diez! Como diez maripositas voladoras. 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋 🦋", emoji: "🦋", border: "#d1c4e9", gradient: "linear-gradient(135deg, #d1c4e9, #673ab7)", textC: "#ffffff" }
+    };
+
+    let activeNumber = null;
+
+    function populateNumbersBoard() {
+      const grid = document.getElementById("numbersGrid");
+      grid.innerHTML = "";
+
+      for (let i = 1; i <= 10; i++) {
+        const item = numbersData[i];
+        const card = document.createElement("div");
+        card.className = "number-card";
+        card.style.setProperty("--color-border", item.border);
+        card.onclick = () => selectNumber(i);
+
+        card.innerHTML = `<span class="number-display-val">${i}</span>`;
+        grid.appendChild(card);
+      }
+    }
+
+    function selectNumber(num) {
+      activeNumber = num;
+      const data = numbersData[num];
+
+      // Update Visuals
+      const display = document.getElementById("numberDisplay");
+      display.style.background = data.gradient;
+      display.style.borderColor = "#ffffff";
+
+      const valEl = document.getElementById("numberValue");
+      valEl.textContent = data.val;
+      valEl.style.color = data.textC;
+
+      // Populate emojis
+      const gridEl = document.getElementById("numberItemsGrid");
+      gridEl.innerHTML = "";
+      gridEl.style.color = data.textC;
+      for (let i = 0; i < num; i++) {
+        gridEl.innerHTML += `<span>${data.emoji}</span>`;
+      }
+
+      const hintEl = document.getElementById("numberHint");
+      hintEl.textContent = data.hint;
+      hintEl.style.color = data.textC === "#333333" ? "rgba(51,51,51,0.9)" : "rgba(255,255,255,0.9)";
+
+      // Confetti burst
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+
+      // Update chalkboard stencil
+      document.getElementById("canvasGuide").textContent = data.val;
+      clearChalkboard();
+
+      // Audio route play
+      reproducirAudioRuta(`assets/audio/${num}.ogg`, () => {
+        speakText(`Número ${data.val}. ${data.text}.`);
+      });
+    }
+
+    // --- Chalkboard tracing canvas logic ---
+    const canvas = document.getElementById("tracingCanvas");
+    const ctx = canvas.getContext("2d");
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+    let chalkColor = "#ffffff";
+
+    function configureCanvas() {
+      ctx.strokeStyle = chalkColor;
+      ctx.lineWidth = 14;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+    }
+
+    function changeChalkColor(color, btnEl) {
+      chalkColor = color;
+      ctx.strokeStyle = color;
+
+      const colorAudios = {
+        '#ffffff': 'assets/audio/blanco.ogg',
+        '#ff5252': 'assets/audio/rojo.ogg',
+        '#ffd600': 'assets/audio/amarillo.ogg',
+        '#4caf50': 'assets/audio/verde.ogg',
+        '#29b6f6': 'assets/audio/azul.ogg'
+      };
+
+      reproducirAudioRuta(colorAudios[color]);
+
+      document.querySelectorAll(".chalk-btn").forEach(btn => btn.classList.remove("selected"));
+      btnEl.classList.add("selected");
+    }
+
+    function clearChalkboard() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function clearChalkboardWithAudio() {
+      clearChalkboard();
+      reproducirAudioRuta("assets/audio/pizarra_limpia.ogg");
+    }
+
+    function getEventCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: ((clientX - rect.left) / rect.width) * canvas.width,
+        y: ((clientY - rect.top) / rect.height) * canvas.height
+      };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const coords = getEventCoords(e);
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getEventCoords(e);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener("mousedown", startDrawing);
+    canvas.addEventListener("mousemove", draw);
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseout", stopDrawing);
+
+    canvas.addEventListener("touchstart", startDrawing, { passive: false });
+    canvas.addEventListener("touchmove", draw, { passive: false });
+    canvas.addEventListener("touchend", stopDrawing);
+
+
+    // --- EXPERIENCE 2: Counting Game Logic ---
+    const countingEmojis = ["🍎", "🐻", "🦖", "⛵", "⭐", "🐝", "🎈", "🍪", "🐟", "🦋"];
+    let currentCountingAmount = 0;
+    let countingStars = 0;
+
+    function buildCountingOptions() {
+      const grid = document.getElementById("countingOptionsGrid");
+      grid.innerHTML = "";
+
+      for (let i = 1; i <= 10; i++) {
+        const btn = document.createElement("button");
+        btn.className = "counting-option-btn";
+        btn.id = `count_opt_${i}`;
+        btn.textContent = i;
+        btn.onclick = () => submitCountingOption(i);
+
+        grid.appendChild(btn);
+      }
+    }
+
+    function loadNextCountingItem() {
+      // Clear visual feedback classes from options
+      for (let i = 1; i <= 10; i++) {
+        const btn = document.getElementById(`count_opt_${i}`);
+        if (btn) {
+          btn.classList.remove("correct", "wrong");
+          btn.style.pointerEvents = "auto";
+        }
+      }
+
+      currentCountingAmount = Math.floor(Math.random() * 10) + 1; // 1 to 10
+      const emoji = countingEmojis[Math.floor(Math.random() * countingEmojis.length)];
+
+      const displayBox = document.getElementById("countingDisplayBox");
+      displayBox.innerHTML = "";
+      for (let i = 0; i < currentCountingAmount; i++) {
+        displayBox.innerHTML += `<span>${emoji}</span>`;
+      }
+    }
+
+    function submitCountingOption(selectedVal) {
+      const selectedBtn = document.getElementById(`count_opt_${selectedVal}`);
+
+      // Disable clicking until transition resolves
+      for (let i = 1; i <= 10; i++) {
+        const btn = document.getElementById(`count_opt_${i}`);
+        if (btn) btn.style.pointerEvents = "none";
+      }
+
+      if (selectedVal === currentCountingAmount) {
+        // Correct answer!
+        selectedBtn.classList.add("correct");
+        countingStars += 1;
+        document.getElementById("countingScore").textContent = `Estrellas ganadas: ⭐ ${countingStars}`;
+
+        // Confetti burst
+        confetti({
+          particleCount: 60,
+          spread: 50,
+          origin: { y: 0.7 }
+        });
+
+        reproducirAudioRuta("assets/audio/muybien.ogg");
+
+        if (countingStars >= 10) {
+          setTimeout(() => {
+            showCountingVictoryScreen();
+          }, 2000);
+        } else {
+          setTimeout(() => {
+            loadNextCountingItem();
+          }, 1800);
+        }
+      } else {
+        // Wrong answer
+        selectedBtn.classList.add("wrong");
+        reproducirAudioRuta("assets/audio/vuelveintentarlo.ogg");
+
+        setTimeout(() => {
+          selectedBtn.classList.remove("wrong");
+          for (let i = 1; i <= 10; i++) {
+            const btn = document.getElementById(`count_opt_${i}`);
+            if (btn) btn.style.pointerEvents = "auto";
+          }
+        }, 1000);
+      }
+    }
+
+    function showCountingVictoryScreen() {
+      document.getElementById("countingGameBox").style.display = "none";
+      document.getElementById("countingVictoryBox").style.display = "block";
+
+      reproducirAudioRuta("assets/audio/lolograste.ogg");
+      triggerVictoryRain();
+    }
+
+    function resetCountingGame() {
+      countingStars = 0;
+      document.getElementById("countingScore").textContent = `Estrellas ganadas: ⭐ 0`;
+      document.getElementById("countingVictoryBox").style.display = "none";
+      document.getElementById("countingGameBox").style.display = "block";
+      loadNextCountingItem();
+    }
+
+
+    // --- EXPERIENCE 3: Sequence Quiz ---
+    let quizStars = 0;
+    let currentQuizIndex = 0;
+    let sequenceCorrectVal = 0;
+    let playedSequenceIndices = [];
+
+    // Generate different sequence types
+    const sequenceTypes = [
+      { format: [1, 2, "❓", 4], answer: 3 },
+      { format: [3, "❓", 5, 6], answer: 4 },
+      { format: ["❓", 6, 7, 8], answer: 5 },
+      { format: [7, 8, "❓", 10], answer: 9 },
+      { format: [5, 6, 7, "❓"], answer: 8 },
+      { format: [2, "❓", 4, 5], answer: 3 },
+      { format: ["❓", 2, 3, 4], answer: 1 },
+      { format: [4, 5, "❓", 7], answer: 6 },
+      { format: [6, 7, 8, "❓"], answer: 9 },
+      { format: [8, 9, "❓", 11], answer: 10 } // Wait, let's keep sequence answers within 1 to 10
+    ];
+
+    function startQuizGame() {
+      document.getElementById("quizOverlay").style.display = "none";
+      document.getElementById("quizActiveView").style.display = "block";
+
+      speakInstruction(3);
+      loadNextQuizItem();
+    }
+
+    function loadNextQuizItem() {
+      // Clear visual feedback classes from options
+      document.querySelectorAll(".sequence-option-btn").forEach(btn => {
+        btn.classList.remove("correct", "wrong");
+        btn.style.pointerEvents = "auto";
+      });
+
+      if (playedSequenceIndices.length >= sequenceTypes.length) {
+        playedSequenceIndices = []; // Cycle reset
+      }
+
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * sequenceTypes.length);
+      } while (playedSequenceIndices.includes(randomIndex));
+
+      playedSequenceIndices.push(randomIndex);
+      const activeSeq = sequenceTypes[randomIndex];
+      sequenceCorrectVal = activeSeq.answer;
+
+      // Populate Sequence train boxes
+      const container = document.getElementById("sequenceBox");
+      container.innerHTML = "";
+
+      activeSeq.format.forEach(item => {
+        if (item === "❓") {
+          container.innerHTML += `<div class="sequence-slot-mystery" id="seqMystery">❓</div>`;
+        } else {
+          container.innerHTML += `<div class="sequence-item">${item}</div>`;
+        }
+      });
+
+      // Construct multiple choice buttons (1 correct, 3 distractors)
+      const options = [sequenceCorrectVal];
+      while (options.length < 4) {
+        const randomOpt = Math.floor(Math.random() * 10) + 1; // 1 to 10
+        if (!options.includes(randomOpt)) {
+          options.push(randomOpt);
+        }
+      }
+      options.sort(() => Math.random() - 0.5); // Shuffle
+
+      // Render Options
+      const optionsRow = document.getElementById("sequenceOptionsRow");
+      optionsRow.innerHTML = "";
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "sequence-option-btn";
+        btn.id = `seq_opt_${opt}`;
+        btn.textContent = opt;
+        btn.onclick = () => submitSequenceOption(opt);
+
+        optionsRow.appendChild(btn);
+      });
+    }
+
+    function submitSequenceOption(selectedVal) {
+      const selectedBtn = document.getElementById(`seq_opt_${selectedVal}`);
+      const mysterySlot = document.getElementById("seqMystery");
+
+      // Disable clicking
+      document.querySelectorAll(".sequence-option-btn").forEach(btn => {
+        btn.style.pointerEvents = "none";
+      });
+
+      if (selectedVal === sequenceCorrectVal) {
+        // Correct!
+        selectedBtn.classList.add("correct");
+        mysterySlot.textContent = selectedVal;
+        mysterySlot.className = "sequence-slot-mystery filled";
+
+        quizStars += 1;
+        document.getElementById("quizScore").textContent = `Estrellas ganadas: ⭐ ${quizStars}`;
+
+        // Confetti blast
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+
+        reproducirAudioRuta("assets/audio/muybien.ogg");
+
+        setTimeout(() => {
+          if (quizStars >= 10) {
+            showQuizVictoryScreen();
+          } else {
+            loadNextQuizItem();
+          }
+        }, 2200);
+      } else {
+        // Wrong answer
+        selectedBtn.classList.add("wrong");
+        reproducirAudioRuta("assets/audio/vuelveintentarlo.ogg");
+
+        setTimeout(() => {
+          selectedBtn.classList.remove("wrong");
+          document.querySelectorAll(".sequence-option-btn").forEach(btn => {
+            btn.style.pointerEvents = "auto";
+          });
+        }, 1000);
+      }
+    }
+
+    function showQuizVictoryScreen() {
+      document.getElementById("quizActiveView").style.display = "none";
+      document.getElementById("quizVictoryView").style.display = "block";
+
+      reproducirAudioRuta("assets/audio/felicitaciones.ogg");
+      triggerVictoryRain();
+    }
+
+    function resetQuizGame() {
+      quizStars = 0;
+      playedSequenceIndices = [];
+      document.getElementById("quizScore").textContent = `Estrellas ganadas: ⭐ 0`;
+      document.getElementById("quizVictoryView").style.display = "none";
+      document.getElementById("quizOverlay").style.display = "flex";
+    }
+
+    function triggerVictoryRain() {
+      const duration = 3.5 * 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.7 }
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.7 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      }());
+    }
+
+
+    // --- Global Init ---
+    window.addEventListener("DOMContentLoaded", () => {
+      populateNumbersBoard();
+      configureCanvas();
+
+      // Default first select
+      selectNumber(1);
+
+      // Build Counting options and load first item
+      buildCountingOptions();
+      loadNextCountingItem();
+    });
+
+  </script>
+</body>
+
+</html>
