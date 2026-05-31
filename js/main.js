@@ -127,6 +127,20 @@ document.querySelectorAll('.btn-juego').forEach(boton => {
 
 });
 
+let bienvenidaReproducida = false;
+
+document.addEventListener('click', () => {
+
+    if (bienvenidaReproducida) return;
+
+    bienvenidaReproducida = true;
+
+    setTimeout(() => {
+        reproducirAudioRuta('assets/audio/inicio_pag.ogg');
+    }, 100);
+
+}, { once: true });
+
 // Audio routing helper
     let audioActual = null;
     function reproducirAudioRuta(ruta, callback = null) {
