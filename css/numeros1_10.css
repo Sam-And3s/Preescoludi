@@ -12,10 +12,12 @@ body {
 
 .numero-especial {
   font-family: "Caveat", cursive !important;
+  font-size: larger;
   font-optical-sizing: auto !important;
   font-weight: 700 !important;
   font-style: normal !important;
   margin-left: -10px !important;
+  -webkit-text-stroke: 1px ;
 
 }
 
@@ -66,6 +68,7 @@ body {
 .font-banner-numeros10 span:nth-child(2) { animation-delay: 0.2s; color: #0288d1; }
 .font-banner-numeros10 span:nth-child(3) { animation-delay: 0.3s; color: #f57f17; }
 .font-banner-numeros10 span:nth-child(4) { animation-delay: 0.4s; color: #2e7d32; }
+.font-banner-numeros10 span:nth-child(5) { animation-delay: 0.5s; color: #7c4dff; }
 
 @keyframes bounce-letters-num10 {
   0% { transform: translateY(0) rotate(0deg); }
