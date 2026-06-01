@@ -18,7 +18,8 @@ body {
   font-style: normal !important;
   margin-left: -10px !important;
   -webkit-text-stroke: 1px ;
-
+  margin-left: 2px !important;
+  margin-right: 2px !important;
 }
 .navbar-custom {
   background: rgba(255, 255, 255, 0.95);
@@ -189,7 +190,7 @@ body {
 /* Experience 2: Floating Balloons Game */
 .balloons-area {
   position: relative;
-  min-height: 380px;
+  min-height: 550px;
   background: linear-gradient(180deg, #e3f2fd, #bbdefb);
   border-radius: 2rem;
   border: 5px dashed var(--color-primary);
@@ -445,26 +446,29 @@ body {
   background: var(--color-primary);
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 90px;
-  height: 90px;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  gap: 6px;
+  margin-top: 10px;
   transition: all 0.2s ease;
   box-shadow: var(--shadow-sm);
-  animation: palpitar-hub 1.2s infinite;
+  animation: palpitar 1.2s infinite;
+}
+
+@keyframes palpitar {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 214, 0, 0.7); }
+  50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(255, 214, 0, 0.9); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 214, 0, 0.7); }
 }
 
 .speech-badge:hover {
-  background: var(--color-accent);
-  transform: scale(1.08) rotate(5deg);
-}
-
-.speech-badge img {
-  width: 80px !important;
-  height: 80px !important;
+ background: var(--color-accent);
+  transform: scale(1.05);
 }
 
 /* Floating Balloons Animation */
@@ -526,15 +530,6 @@ body {
     height: 14px;
   }
 
-  .speech-badge {
-    width: 80px;
-    height: 80px;
-  }
-
-  .speech-badge img {
-    width: 70px !important;
-    height: 70px !important;
-  }
 }
 
 @media (max-width: 480px) {
@@ -593,16 +588,6 @@ body {
     min-width: 48px;
     font-size: 1.4rem;
     padding: 0.5rem 0.3rem;
-  }
-
-  .speech-badge {
-    width: 70px;
-    height: 70px;
-  }
-
-  .speech-badge img {
-    width: 60px !important;
-    height: 60px !important;
   }
 }
 

@@ -16,7 +16,7 @@
   <!-- Confetti library for celebrations -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
-<body>
+<body onload="aplicarFuenteGlobal()">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg py-3 sticky-top navbar-custom mb-5">
     <div class="container">
@@ -148,17 +148,21 @@
       };
     }
 
+    // Audio routing helper
     let audioActual = null;
-    function playAudio(src, fallbackText) {
+    function reproducirAudioRuta(ruta, callback = null) {
       if (audioActual) {
         audioActual.pause();
         audioActual.currentTime = 0;
       }
 
-      audioActual = new Audio(src);
+      audioActual = new Audio(ruta);
+      audioActual.onended = () => {
+        if (callback) callback();
+      };
       audioActual.play().catch(err => {
-        console.warn(`No se pudo reproducir el audio: ${src}. Ejecutando fallback.`, err);
-        speakText(fallbackText);
+        console.warn(`No se pudo reproducir el audio: ${ruta}. Ejecutando fallback.`, err);
+        if (callback) callback();
       });
     }
 
@@ -169,7 +173,7 @@
         3: "assets/audio/ins3Familias.ogg"
       };
 
-      playAudio(instructions[index]);
+      reproducirAudioRuta(instructions[index]);
     }
 
     // ---------- Game 1: House Sorting ----------
@@ -182,7 +186,7 @@
         // pick a random target number (10-99) that belongs to one of the families
         const targetFamily = families[Math.floor(Math.random()*families.length)];
         const targetNumber = targetFamily + Math.floor(Math.random()*10);
-        giantEl.textContent = targetNumber;
+        giantEl.innerHTML = aplicarFuenteEspecial(targetNumber.toString());
         // generate three house options: one correct, two wrong
         const correctHouse = targetFamily;
         const wrongHouses = families.filter(f=>f!==correctHouse);
@@ -200,7 +204,7 @@
         options.forEach(fam=>{
           const div=document.createElement('div');
           div.className='house-item-box';
-          div.innerHTML=`<div class="house-graphic">🏠</div><p class="house-label">Casa del ${fam}</p>`;
+          div.innerHTML= aplicarFuenteEspecial(`<div class="house-graphic">🏠</div><p class="house-label">Casa del ${fam.toString()}</p>`);
           div.addEventListener('click',()=>{
             // Disable clicks on all houses temporarily
             document.querySelectorAll('.house-item-box').forEach(h => h.style.pointerEvents = 'none');
@@ -208,13 +212,13 @@
             if(fam===correctHouse){
               div.classList.add('correct');
               confetti();
-              playAudio('assets/audio/muybien.ogg','¡Muy bien!');
+              reproducirAudioRuta('assets/audio/muybien.ogg');
               setTimeout(() => {
                 startRound();
               }, 1500);
             }else{
               div.classList.add('wrong');
-              playAudio('assets/audio/vuelveintentarlo.ogg','Inténtalo de nuevo');
+              reproducirAudioRuta('assets/audio/vuelveintentarlo.ogg');
               setTimeout(() => {
                 div.classList.remove('wrong');
                 document.querySelectorAll('.house-item-box').forEach(h => h.style.pointerEvents = 'auto');
@@ -237,6 +241,25 @@
     })();
 
     // ---------- Game 2: Floating Balloons ----------
+
+    document.getElementById('btn-start-balloons')
+      .addEventListener('click', () => {
+
+        const overlay = document.getElementById('balloons-start-overlay');
+        overlay.style.display = 'none';
+        overlay.remove();
+
+      init();
+    });
+
+    document.getElementById('btn-restart-balloons')
+    .addEventListener('click', () => {
+
+      document.getElementById('balloons-victory-overlay').style.display = 'none';
+
+      init();
+    });
+
     (function(){
       const families = [10,20,30,40,50,60,70,80,90];
       const balloonsContainer = document.getElementById('balloons-container');
@@ -250,10 +273,24 @@
         
         // pick target family
         targetFamily = families[Math.floor(Math.random()*families.length)];
-        instruction.textContent = `Revienta los globos de la familia del ${targetFamily} (⭐ ${correctCount}/5)`;
+        instruction.innerHTML = aplicarFuenteEspecial(`Revienta los globos de la familia del ${targetFamily.toString()} (⭐ ${correctCount.toString()}/5)`);
+
+          const audiosFamilia = {
+            10: 'assets/audio/globos10.ogg',
+            20: 'assets/audio/globos20.ogg',
+            30: 'assets/audio/globos30.ogg',
+            40: 'assets/audio/globos40.ogg',
+            50: 'assets/audio/globos50.ogg',
+            60: 'assets/audio/globos60.ogg',
+            70: 'assets/audio/globos70.ogg',
+            80: 'assets/audio/globos80.ogg',
+            90: 'assets/audio/globos90.ogg'
+          };
+
+          reproducirAudioRuta(audiosFamilia[targetFamily]);
         
         // Spawn 8 initial balloons with staggered delay
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 10; i++) {
           createBalloon(true);
         }
       }
@@ -265,7 +302,7 @@
         
         // Determine value: 40% chance of target family, 60% chance of other
         let num;
-        if (Math.random() < 0.4) {
+        if (Math.random() < 0.6) {
           num = targetFamily + Math.floor(Math.random() * 10);
         } else {
           let randomFamily;
@@ -275,7 +312,7 @@
           num = randomFamily + Math.floor(Math.random() * 10);
         }
         
-        div.textContent = num;
+        div.innerHTML = aplicarFuenteEspecial(num.toString());
         div.dataset.num = num;
         div.style.background = `hsl(${Math.random()*360}, 75%, 60%)`;
         
@@ -302,8 +339,9 @@
           if (belongs) {
             div.classList.add('popped');
             correctCount++;
-            instruction.textContent = `Revienta los globos de la familia del ${targetFamily} (⭐ ${correctCount}/5)`;
-            playAudio('assets/audio/muybien.ogg', '¡Muy bien!');
+            instruction.innerHTML = aplicarFuenteEspecial(`Revienta los globos de la familia del ${targetFamily.toString()} (⭐ ${correctCount.toString()}/5)`);
+            
+            reproducirAudioRuta('assets/audio/muybien.ogg');
             
             // Standard confetti burst
             window.confetti({
@@ -315,13 +353,16 @@
             // Win condition check
             if (correctCount >= 5) {
               // disable clicks
-              document.querySelectorAll('.balloon-element').forEach(b => b.style.pointerEvents = 'none');
+              document.querySelectorAll('.balloon-element')
+                .forEach(b => b.style.pointerEvents = 'none');
+
               setTimeout(() => {
-                triggerVictoryRain();
-                playAudio('assets/audio/felicitaciones.ogg', '¡Felicitaciones!');
-                setTimeout(() => {
-                  init();
-                }, 3000);
+                  triggerVictoryRain();
+                  reproducirAudioRuta('assets/audio/felicitaciones.ogg', () => {
+                      document.getElementById('balloons-victory-overlay').style.display = 'flex';
+
+                  });
+                
               }, 400);
             } else {
               // Replace balloon after it pops
@@ -332,7 +373,7 @@
             }
           } else {
             div.classList.add('wrong');
-            playAudio('assets/audio/vuelveintentarlo.ogg', 'Inténtalo de nuevo');
+            reproducirAudioRuta('assets/audio/vuelveintentarlo.ogg');
             setTimeout(() => {
               div.classList.remove('wrong');
             }, 800);
@@ -350,7 +391,7 @@
         })();
       }
 
-      init();
+      window.init = init;
     })();
 
     // ---------- Game 3: Puzzle Grid ----------
@@ -358,14 +399,15 @@
       const families = [10,20,30,40,50,60,70,80,90];
       const gridEl=document.getElementById('puzzle-grid');
       const trayEl=document.getElementById('scrambled-tray');
-      const overlay=document.getElementById('quiz-overlay');
+      const overlay=document.getElementById('puzzle-start-overlay');
       const restartBtn=document.getElementById('restart-puzzle');
       const bgEmoji=document.getElementById('puzzle-bg-emoji');
       let numbers=[]; // shuffled numbers
       let currentIndex=0;
 
       function start(){
-        overlay.style.display='none';
+        overlay.style.display = 'none';
+        const restartBtn = document.getElementById('restart-puzzle');
         gridEl.innerHTML='';
         trayEl.innerHTML='';
         currentIndex = 0; // BUG FIX: Reset progress pointer!
@@ -376,6 +418,19 @@
 
         // pick random family
         const family = families[Math.floor(Math.random()*families.length)];
+
+        const audiosFamilia = {
+          10: 'assets/audio/orden10.ogg',
+          20: 'assets/audio/orden20.ogg',
+          30: 'assets/audio/orden30.ogg',
+          40: 'assets/audio/orden40.ogg',
+          50: 'assets/audio/orden50.ogg',
+          60: 'assets/audio/orden60.ogg',
+          70: 'assets/audio/orden70.ogg',
+          80: 'assets/audio/orden80.ogg',
+          90: 'assets/audio/orden90.ogg'
+        }
+        reproducirAudioRuta(audiosFamilia[family]);
         
         // generate numbers family .. family+9
         const base = family;
@@ -400,7 +455,7 @@
         shuffled.forEach(num=>{
           const btn=document.createElement('button');
           btn.className='scrambled-tile-btn';
-          btn.textContent=num;
+          btn.innerHTML=aplicarFuenteEspecial(num.toString());
           btn.dataset.value=num;
           btn.addEventListener('click',()=>{
             const expected=numbers[currentIndex];
@@ -408,7 +463,7 @@
               btn.classList.add('correct');
               // reveal slot
               const slot=gridEl.children[currentIndex];
-              slot.textContent=num;
+              slot.innerHTML=aplicarFuenteEspecial(num.toString());
               slot.classList.add('revealed');
               currentIndex++;
               
@@ -417,13 +472,13 @@
                 setTimeout(() => {
                   bgEmoji.textContent='🎉';
                   overlay.style.display='flex';
-                  playAudio('assets/audio/felicitaciones.ogg', '¡Felicitaciones, completaste el rompecabezas!');
+                  reproducirAudioRuta('assets/audio/felicitaciones.ogg');
                   confetti();
                 }, 400);
               }
             }else{
               btn.classList.add('wrong');
-              playAudio('assets/audio/vuelveintentarlo.ogg','Inténtalo de nuevo');
+              reproducirAudioRuta('assets/audio/vuelveintentarlo.ogg');
               setTimeout(() => {
                 btn.classList.remove('wrong');
               }, 1000);
@@ -441,9 +496,26 @@
         })();
       }
 
-      restartBtn.addEventListener('click',start);
-      start();
+      document.getElementById('btn-start-puzzle')
+        .addEventListener('click', start);
+
+      restartBtn.addEventListener('click', start);
+      
     })();
+
+    function aplicarFuenteEspecial(texto) {
+      return texto.replace(/[47]/g, numero =>
+        `<span class="numero-especial">${numero}</span>`
+      );
+    }
+
+    function aplicarFuenteGlobal() {
+      document.querySelectorAll(".especial-47").forEach(el => {
+        el.innerHTML = aplicarFuenteEspecial(el.textContent);
+      });
+    }
+
+    
   </script>
 </body>
 </html>
