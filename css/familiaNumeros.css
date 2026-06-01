@@ -56,11 +56,17 @@ body {
 /* Header animated text */
 .font-banner-familias span {
   font-family: var(--font-banner);
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
   text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
   margin: 0 3px;
   display: inline-block;
   animation: bounce-letters-familias 2s ease-in-out infinite alternate;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  white-space: nowrap;
+}
+
+.word{
+    display:inline-block;
+    white-space:nowrap;
 }
 
 .font-banner-familias span:nth-child(1) { animation-delay: 0.1s; color: #ff1744; }
@@ -533,6 +539,7 @@ body {
 }
 
 @media (max-width: 480px) {
+
   .number-card-giant {
     width: 100px;
     height: 100px;
